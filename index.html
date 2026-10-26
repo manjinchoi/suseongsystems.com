@@ -1,0 +1,1883 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수성시스템스 | 공장자동화 설비 설계·제작·설치</title>
+<meta name="description" content="주식회사 수성시스템스 — 자동차·이차전지·소재 공장의 조립·반송·가공 자동화 설비를 설계하고, 구미 공장에서 제작해 현장에 설치합니다. 대구 본사 · 구미 공장.">
+<link rel="canonical" href="https://suseongsystems.com/">
+<meta name="theme-color" content="#002a66">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="수성시스템스">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="수성시스템스 — 도면 첫 장부터 시운전까지">
+<meta property="og:description" content="자동차·이차전지·소재 공장의 조립·반송·가공 설비를 설계하고 구미 공장에서 제작해 고객 현장에 설치합니다.">
+<meta property="og:url" content="https://suseongsystems.com/">
+<meta property="og:image" content="https://suseongsystems.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="수성시스템스 — 6공정 조립라인 3D 예시 모델">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "주식회사 수성시스템스", "alternateName": "Suseong Systems Co., Ltd.", "url": "https://suseongsystems.com/", "logo": "https://suseongsystems.com/logo.png", "email": "mjchoi@suseongsystems.com", "telephone": "+82-10-6268-7881", "taxID": "481-87-03866", "address": {"@type": "PostalAddress", "streetAddress": "달서대로 559, 이앤씨이노비즈타워 608호", "addressLocality": "달서구", "addressRegion": "대구광역시", "addressCountry": "KR"}}</script>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+@font-face{font-family:"Pretendard";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/Pretendard-Regular.subset.woff2") format("woff2")}
+@font-face{font-family:"Pretendard";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/Pretendard-SemiBold.subset.woff2") format("woff2")}
+@font-face{font-family:"Pretendard";font-style:normal;font-weight:700;font-display:swap;src:url("fonts/Pretendard-Bold.subset.woff2") format("woff2")}
+:root{
+  /* Layout: brand-deep cover (headline | live 3D example line: design -> build -> install -> run), then neutral bands
+     from the 수성시스템스 design system: about -> business cards with 3D renders -> process (dark) -> clients
+     -> nameplate + locations -> contact (dark) -> brand-deep title-block footer. One designed look, no theme switch. */
+  /* 수성시스템스 design system, light theme */
+  --surface:#f6f7f9;
+  --surface-raised:#ffffff;
+  --line:#d5dbe2;
+  --line-strong:#7d8b99;
+  --ink:#16202b;
+  --ink-muted:#56626f;
+  --brand:#004099;
+  --on-brand:#ffffff;
+  --brand-deep:#002a66;
+  --brand-soft:#e1e9f5;
+  --steel:#8593a1;
+  --accent:#e8a317;
+  /* the same system's dark theme, used inside dark bands */
+  --d-surface:#0f1419;
+  --d-raised:#18212b;
+  --d-line:#2a3542;
+  --d-line-strong:#6b7a89;
+  --d-ink:#e7ecf1;
+  --d-ink-muted:#9aa7b4;
+  --d-brand:#6f9fe3;
+  --d-on-brand:#0b1620;
+  --d-accent:#f0b43c;
+  --d-success:#4cc38a;
+  /* text on brand-deep */
+  --deep-muted:#a9bedd;
+  --deep-line:rgba(169,190,221,.26);
+  --focus:var(--brand);
+  --font-sans:"Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",Consolas,"D2Coding",ui-monospace,monospace;
+  --fs-h1:clamp(2.5rem,1.2rem + 3.3vw,4.25rem);
+  --fs-h2:clamp(1.85rem,1.25rem + 1.9vw,2.85rem);
+  --fs-statement:clamp(1.6rem,1.05rem + 2vw,2.7rem);
+  --bar-h:72px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bar-h) + env(safe-area-inset-top,0px) + 8px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--surface-raised);color:var(--ink);font-family:var(--font-sans);font-size:1rem;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface-raised)}
+h1,h2,h3{margin:0;font-weight:700;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.deep,.dark{--focus:var(--d-brand)}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.logo{display:block;height:auto}
+.logo-white{--lg-sym:#ffffff;--lg-word:#ffffff}
+.logo-black{--lg-sym:#000000;--lg-word:#000000}
+.wrap{max-width:1320px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+@media (min-width:768px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+@media (min-width:1280px){.wrap{padding-left:max(56px,env(safe-area-inset-left,0px));padding-right:max(56px,env(safe-area-inset-right,0px))}}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- header ---------- */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;background:rgba(255,255,255,.94);-webkit-backdrop-filter:saturate(160%) blur(12px);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:var(--bar-h)}
+.brand{display:block;flex:none;text-decoration:none}
+.brand .logo{width:204px}
+@media (min-width:768px){.brand .logo{width:244px}}
+@media (min-width:1280px){.brand .logo{width:268px}}
+.nav{display:none}
+.nav a{position:relative;padding:8px 0;font-size:.9375rem;font-weight:600;color:var(--ink-muted);text-decoration:none;transition:color .15s}
+.nav a:hover{color:var(--ink)}
+.nav a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:0;bottom:1px;height:2px;background:var(--brand);transform:scaleX(0);transform-origin:left center;transition:transform .2s ease}
+.nav a:not(.nav-cta):hover::after{transform:scaleX(1)}
+.nav .nav-cta{display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:4px;background:var(--brand);color:var(--on-brand);font-weight:700}
+.nav .nav-cta:hover{background:var(--brand-deep);color:var(--on-brand)}
+.menu-btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;font:inherit;font-size:.875rem;font-weight:600;color:var(--ink);background:transparent;border:1px solid var(--line-strong);border-radius:4px;cursor:pointer}
+.bars{position:relative;width:15px;height:10px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor}
+.bars::after{content:"";position:absolute;left:0;right:0;top:2.75px;border-top:1.5px solid currentColor}
+.mnav{border-top:1px solid var(--line);background:var(--surface-raised)}
+.mnav-list{display:grid;padding-block:4px 16px}
+.mnav-list a{display:block;padding:14px 0;color:var(--ink);text-decoration:none;font-weight:600;border-bottom:1px solid var(--line)}
+.mnav-list a:last-child{border-bottom:0;color:var(--brand);font-weight:700}
+@media (min-width:1024px){.nav{display:flex;align-items:center;gap:28px}.menu-btn,.mnav{display:none}}
+
+/* ---------- hero (cover) ---------- */
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(110% 85% at 74% 34%,#0B3E86 0%,var(--brand-deep) 46%,#001A45 100%)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M18 24h12M24 18v12' stroke='%23a9bedd' stroke-opacity='.28' stroke-width='1.5'/%3E%3C/svg%3E");background-size:48px 48px;-webkit-mask-image:radial-gradient(80% 70% at 66% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(80% 70% at 66% 45%,#000 20%,transparent 78%)}
+.hero-inner{position:relative;display:grid;gap:40px;padding-block:clamp(44px,6vw,92px) clamp(56px,7vw,104px)}
+@media (min-width:1080px){.hero-inner{grid-template-columns:minmax(0,5.3fr) minmax(0,6.7fr);gap:56px;align-items:center}}
+.hero-copy{min-width:0}
+.kicker{display:flex;align-items:center;gap:12px;margin-bottom:24px;font-size:.75rem;font-weight:600;letter-spacing:.16em;color:var(--deep-muted)}
+.kicker i{flex:none;width:8px;height:8px;background:var(--accent)}
+.hero h1{font-size:var(--fs-h1);line-height:1.16;letter-spacing:-.03em;color:#fff}
+.hero h1 span{display:block;white-space:nowrap}
+.hero h1 .l1{color:var(--deep-muted)}
+.hero-lead{max-width:30em;margin-top:24px;font-size:1.0625rem;line-height:1.85;color:var(--deep-muted)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:4px;font-size:1rem;font-weight:700;text-decoration:none;border:1px solid transparent;transition:background-color .18s,color .18s,border-color .18s}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--d-brand);color:var(--d-on-brand)}
+.btn-primary:hover{background:#8DB4EC}
+.btn-ghost{border-color:var(--deep-line);color:#fff;font-weight:600}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.hero-facts{display:grid;margin:44px 0 0;border-top:1px solid var(--deep-line)}
+.hero-facts>div{display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--deep-line)}
+.hero-facts dt{font-size:.6875rem;font-weight:600;letter-spacing:.14em;color:var(--deep-muted)}
+.hero-facts dd{margin:0;font-size:.9375rem;font-weight:600;color:#fff}
+@media (min-width:640px){
+  .hero-facts{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-facts>div{grid-template-columns:1fr;gap:4px;padding:16px 16px 0 0;border-bottom:0}
+  .hero-facts>div+div{padding-left:16px;border-left:1px solid var(--deep-line)}
+}
+
+/* ---------- viewport ---------- */
+.vp-fig{margin:0;min-width:0;display:grid;gap:12px}
+.vp{position:relative;width:100%;max-width:100%;aspect-ratio:5/4;overflow:hidden;isolation:isolate;border:1px solid rgba(169,190,221,.28);border-radius:8px;background:radial-gradient(90% 80% at 55% 42%,rgba(52,104,184,.32),rgba(0,20,50,.1) 70%),linear-gradient(180deg,#0B2A5C,#061733)}
+@media (max-width:640px){.vp{aspect-ratio:1/1.08}}
+.stage{position:absolute;inset:0}
+.stage canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab;outline:none}
+.vp.dragging .stage canvas{cursor:grabbing}
+.hud-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px;pointer-events:none}
+.hud-left{display:grid;gap:8px;justify-items:start;min-width:0}
+.file{display:inline-flex;align-items:center;gap:8px;padding:6px 10px 6px 8px;border:1px solid rgba(169,190,221,.26);border-radius:4px;background:rgba(0,18,45,.62);font-family:var(--font-mono);font-size:.75rem;line-height:1.2;color:#fff}
+.file svg{flex:none;width:14px;height:14px}
+.file .tag{padding:2px 6px;border-radius:2px;background:rgba(240,180,60,.16);color:var(--d-accent);font-family:var(--font-sans);font-size:.6875rem;font-weight:600}
+.hint{display:none;align-items:center;gap:6px;padding:4px 8px;font-size:.6875rem;color:var(--deep-muted);background:rgba(0,18,45,.5);border-radius:2px;transition:opacity .4s}
+@media (pointer:fine){.hint{display:inline-flex}}
+.vp.dragged .hint{opacity:0}
+.vcube-wrap{flex:none;width:66px;height:66px;display:grid;place-items:center;perspective:260px}
+.vcube{position:relative;width:38px;height:38px;transform-style:preserve-3d;transform:rotateX(-31deg) rotateY(24deg)}
+.vcube span{position:absolute;inset:0;display:grid;place-items:center;font-size:6px;font-weight:700;letter-spacing:.04em;color:#D9E6F6;background:rgba(18,52,104,.9);border:1px solid rgba(169,200,235,.55);-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.vcube .f1{transform:translateZ(19px)}
+.vcube .f2{transform:rotateY(180deg) translateZ(19px)}
+.vcube .f3{transform:rotateY(90deg) translateZ(19px)}
+.vcube .f4{transform:rotateY(-90deg) translateZ(19px)}
+.vcube .f5{transform:rotateX(90deg) translateZ(19px);background:rgba(34,78,146,.92)}
+.vcube .f6{transform:rotateX(-90deg) translateZ(19px)}
+.triad{position:absolute;left:12px;bottom:96px;width:56px;height:56px;pointer-events:none;overflow:visible}
+.triad line{stroke-width:2;stroke-linecap:round}
+.triad text{font-family:var(--font-sans);font-size:8px;font-weight:700;text-anchor:middle}
+.hud-bottom{position:absolute;left:0;right:0;bottom:0;display:grid;gap:10px;padding:28px 12px 12px;background:linear-gradient(180deg,rgba(4,18,44,0),rgba(4,18,44,.82) 46%);pointer-events:none}
+.phases{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.phases li{--p:0%;display:grid;gap:6px;min-width:0;color:rgba(169,190,221,.62);transition:color .3s}
+.phases li::before{content:"";height:3px;border-radius:2px;background:linear-gradient(var(--d-brand),var(--d-brand)) 0 0/var(--p) 100% no-repeat,rgba(169,190,221,.22)}
+.phases li span{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px}
+.phases b{font-size:.8125rem;font-weight:600}
+.phases small{font-size:.5625rem;font-weight:600;letter-spacing:.12em}
+.phases li.done{color:var(--deep-muted)}
+.phases li.on{color:#fff}
+.status{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:28px;font-family:var(--font-mono);font-size:.75rem;color:var(--deep-muted)}
+.status>span{display:inline-flex;align-items:center;gap:8px}
+.status b{font-weight:500;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.state{font-family:var(--font-sans);font-weight:600;color:#fff}
+.lamp{width:8px;height:8px;border-radius:50%;background:#4E6077}
+.lamp.run{background:var(--d-success);box-shadow:0 0 0 3px rgba(76,195,138,.22)}
+.replay{pointer-events:auto;display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 10px;font:inherit;font-family:var(--font-sans);font-size:.75rem;font-weight:600;color:#fff;background:rgba(0,18,45,.55);border:1px solid rgba(169,190,221,.32);border-radius:4px;cursor:pointer}
+.replay svg{width:12px;height:12px}
+.replay:hover{border-color:var(--d-brand)}
+.vp-cap{font-size:.75rem;color:var(--deep-muted)}
+.vp-fallback{display:none}
+.vp.no-gl .vp-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:56px 18px 22px}
+.vp.no-gl .stage,.vp.no-gl .vcube-wrap,.vp.no-gl .triad,.vp.no-gl .hud-bottom,.vp.no-gl .hint{display:none}
+.vp-fallback svg{display:block;width:100%;max-width:100%;height:auto}
+.fb-bed{fill:none;stroke:rgba(169,190,221,.16);stroke-width:34}
+.fb-l{fill:none;stroke:#7F9BBF;stroke-width:1.2}
+.fb-m{fill:rgba(169,190,221,.14);stroke:#8FA9CB;stroke-width:1.2}
+.fb-d{fill:none;stroke:#8FA9CB;stroke-width:1.2;stroke-dasharray:5 4}
+.fb-p{fill:var(--d-brand)}
+.fb-t{font-family:var(--font-mono);font-size:16px;fill:#DCE7F5}
+
+/* ---------- shared section parts ---------- */
+.band{padding-block:clamp(76px,10vw,136px)}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;font-size:.75rem;font-weight:600;letter-spacing:.16em;color:var(--ink-muted)}
+.eyebrow::before{content:"";flex:none;width:8px;height:8px;background:var(--brand)}
+.dark .eyebrow{color:var(--d-ink-muted)}
+.dark .eyebrow::before{background:var(--d-brand)}
+h2{font-size:var(--fs-h2);line-height:1.26;letter-spacing:-.02em}
+.sec-head{display:grid;max-width:46rem;margin-bottom:clamp(40px,5vw,64px)}
+.sec-lead{margin-top:16px;font-size:1.0625rem;color:var(--ink-muted)}
+.dark .sec-lead{color:var(--d-ink-muted)}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;gap:32px}
+@media (min-width:1024px){.about-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:80px;align-items:end}}
+.statement{font-size:var(--fs-statement);font-weight:700;line-height:1.38;letter-spacing:-.025em}
+.statement em{font-style:normal;color:var(--brand);background:linear-gradient(180deg,transparent 62%,var(--brand-soft) 62%,var(--brand-soft) 94%,transparent 94%);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.about-text{display:grid;gap:16px;max-width:34em;font-size:1.0625rem;color:var(--ink-muted)}
+.strengths{list-style:none;margin:clamp(56px,7vw,96px) 0 0;padding:0;display:grid;border-top:2px solid var(--ink)}
+.strengths li{display:grid;gap:8px;align-content:start;padding:24px 0 28px;border-bottom:1px solid var(--line)}
+.strengths .k{font-size:.75rem;font-weight:700;letter-spacing:.14em;color:var(--brand)}
+.strengths h3{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.strengths p{font-size:.96875rem;color:var(--ink-muted)}
+@media (min-width:800px){
+  .strengths{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .strengths li{padding:28px 32px 8px 0;border-bottom:0}
+  .strengths li+li{padding-left:32px;border-left:1px solid var(--line)}
+}
+
+/* ---------- business ---------- */
+.business{background:var(--surface)}
+.biz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.biz{display:flex;flex-direction:column;min-width:0;background:var(--surface-raised);border:1px solid var(--line);border-radius:4px;overflow:hidden;transition:transform .25s ease,border-color .25s ease}
+.biz:hover{transform:translateY(-3px);border-color:var(--brand)}
+.biz-media{position:relative;aspect-ratio:16/10;max-width:100%;border-bottom:1px solid var(--line);background:radial-gradient(90% 90% at 50% 18%,#FFFFFF 0%,#F2F5F9 55%,#E4EAF2 100%)}
+.biz-media::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,64,153,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,64,153,.05) 1px,transparent 1px);background-size:24px 24px;-webkit-mask-image:radial-gradient(75% 70% at 50% 55%,#000,transparent);mask-image:radial-gradient(75% 70% at 50% 55%,#000,transparent)}
+.biz-ic{position:absolute;left:50%;top:50%;width:64px;height:64px;transform:translate(-50%,-50%);transition:opacity .4s}
+.biz-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;animation:fadein .6s ease both}
+.biz-media.ready .biz-ic{opacity:0}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.biz-body{display:flex;flex-direction:column;gap:12px;flex:1;padding:24px}
+.biz h3{font-size:1.25rem;font-weight:700;letter-spacing:-.015em}
+.biz p{font-size:.96875rem;line-height:1.75;color:var(--ink-muted)}
+.tags{list-style:none;display:flex;flex-wrap:wrap;gap:4px;margin:auto 0 0;padding:8px 0 0}
+.tags li{padding:4px 8px;font-size:.75rem;font-weight:600;color:var(--ink-muted);background:var(--surface);border:1px solid var(--line);border-radius:2px}
+.ic{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ic-y{fill:var(--brand-soft);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
+.ic-d{fill:var(--brand-soft);stroke:var(--brand);stroke-width:1.5;stroke-dasharray:3 2.5}
+.ic-f{fill:var(--ink)}
+@media (prefers-reduced-motion:reduce){.biz,.biz:hover{transition:none;transform:none}.biz-media img{animation:none}}
+
+/* ---------- process ---------- */
+.process{background:var(--d-surface);color:var(--d-ink)}
+.process h2{color:var(--d-ink)}
+.rail-wrap{position:relative}
+.rail{position:relative;list-style:none;margin:0;padding:0;display:grid;gap:40px}
+.rail::before{content:"";position:absolute;left:4px;top:8px;bottom:8px;width:10px;border-left:1px solid var(--d-line-strong);border-right:1px solid var(--d-line-strong)}
+.st{position:relative;display:grid;gap:8px;align-content:start;min-width:0;padding-left:44px}
+.node{position:absolute;left:0;top:6px;width:18px;height:18px;border:1.5px solid var(--d-brand);background:var(--d-surface);border-radius:2px}
+.st-no{font-family:var(--font-mono);font-weight:500;font-size:clamp(1.6rem,1.2rem + 1.3vw,2.3rem);line-height:1;letter-spacing:-.02em;color:var(--d-brand)}
+.st h3{font-size:1.25rem;font-weight:600;color:var(--d-ink)}
+.st p{font-size:.96875rem;color:var(--d-ink-muted)}
+.st-out{display:grid;gap:4px;margin-top:8px;padding-top:12px;border-top:1px dashed var(--d-line-strong);font-size:.875rem;color:var(--d-ink)}
+.st-out span{font-size:.625rem;font-weight:600;letter-spacing:.16em;color:var(--d-ink-muted)}
+.shuttle{display:none}
+@media (min-width:1024px){
+  .rail{grid-template-columns:repeat(5,minmax(0,1fr));gap:28px}
+  .rail::before{left:0;right:0;top:4px;bottom:auto;width:auto;height:10px;border:0;border-top:1px solid var(--d-line-strong);border-bottom:1px solid var(--d-line-strong)}
+  .st{padding-left:0;padding-top:52px}
+  .node{top:0}
+  .shuttle{display:block;position:absolute;z-index:1;top:2px;left:0;width:30px;height:14px;margin-left:-6px;background:var(--d-accent);border-radius:2px;animation:shuttle 12s cubic-bezier(.6,0,.3,1) infinite}
+}
+@media (prefers-reduced-motion:reduce){.shuttle{animation:none}}
+@keyframes shuttle{0%,12%{left:0}20%,32%{left:calc(20% + 5.6px)}40%,52%{left:calc(40% + 11.2px)}60%,72%{left:calc(60% + 16.8px)}80%,96%{left:calc(80% + 22.4px);opacity:1}100%{left:calc(80% + 22.4px);opacity:0}}
+
+/* ---------- clients ---------- */
+.clients-grid{display:grid;gap:44px}
+@media (min-width:1024px){.clients-grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:80px;align-items:start}}
+.inds{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0;padding:0}
+.inds li{padding:6px 14px;font-size:.9375rem;font-weight:600;border:1px solid var(--line-strong);border-radius:2px}
+.logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:2px solid var(--ink)}
+.logos li{display:flex;align-items:center;min-width:0;min-height:clamp(96px,11vw,136px);padding:20px 20px 20px 0;font-size:clamp(1.4rem,1rem + 1.5vw,2.2rem);font-weight:700;letter-spacing:-.01em;border-bottom:1px solid var(--line)}
+.logos li:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}
+.logos .mask{color:var(--ink-muted);font-weight:600;letter-spacing:.06em}
+.note{margin-top:12px;font-size:.8125rem;color:var(--ink-muted)}
+
+/* ---------- company ---------- */
+.company{background:var(--surface)}
+.company-grid{display:grid;gap:48px;align-items:start}
+@media (min-width:1024px){.company-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}}
+.plate{position:relative;margin:0;padding:40px clamp(24px,4vw,40px) 28px;color:#18222A;border:1px solid #9AA6AE;border-radius:4px;background-color:#CDD3D7;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.035) 0 1px,transparent 1px 7px),linear-gradient(165deg,#E4E8EA 0%,#C9D0D4 48%,#D9DEE1 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(0,0,0,.12)}
+.plate::after{content:"";position:absolute;inset:20px;border:1px solid rgba(24,34,42,.32);border-radius:2px;pointer-events:none}
+.rivet{position:absolute;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#FAFBFC,#9AA5AC 60%,#7E8A92);box-shadow:0 0 0 1px rgba(24,34,42,.35)}
+.r1{top:6px;left:6px}.r2{top:6px;right:6px}.r3{bottom:6px;left:6px}.r4{bottom:6px;right:6px}
+.plate-head{display:grid;justify-items:center;gap:12px;padding:8px 8px 20px;border-bottom:1.5px solid rgba(24,34,42,.4)}
+.plate-logo{width:min(100%,340px);opacity:.88;filter:drop-shadow(0 1px 0 rgba(255,255,255,.6))}
+.plate-en{font-size:.6875rem;font-weight:700;letter-spacing:.22em;color:#3E4B54}
+.plate-rows{margin:0;display:grid}
+.plate-rows>div{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:12px;padding:12px 2px;border-bottom:1px solid rgba(24,34,42,.22)}
+.plate-rows dt{display:grid;gap:2px;font-size:.8125rem;font-weight:700;line-height:1.3}
+.plate-rows dt small{font-size:.5625rem;font-weight:600;letter-spacing:.14em;color:#55626B}
+.plate-rows dd{margin:0;font-size:.9375rem;line-height:1.55;overflow-wrap:anywhere;text-shadow:0 1px 0 rgba(255,255,255,.45)}
+.plate-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding-top:12px;font-size:.5625rem;font-weight:700;letter-spacing:.2em;color:#4A5760}
+@media (max-width:480px){.plate-rows>div{grid-template-columns:1fr;gap:2px}.plate-rows dt{display:flex;gap:8px;align-items:baseline}}
+.sites{display:grid;gap:16px;min-width:0}
+.site{display:grid;gap:12px;padding:24px;background:var(--surface-raised);border:1px solid var(--line);border-radius:4px}
+.site h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:1.1875rem;font-weight:700}
+.site h3 span{font-size:.625rem;font-weight:600;letter-spacing:.16em;color:var(--ink-muted)}
+.addr{font-size:1rem;overflow-wrap:anywhere}
+.site-links{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;font:inherit;font-size:.8125rem;font-weight:600;color:var(--ink);text-decoration:none;background:var(--surface-raised);border:1px solid var(--line-strong);border-radius:4px;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
+.chip:hover,.chip.done{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.dark .chip{color:var(--d-ink);background:transparent;border-color:var(--d-line-strong)}
+.dark .chip:hover,.dark .chip.done{background:var(--d-brand);border-color:var(--d-brand);color:var(--d-on-brand)}
+
+/* ---------- contact ---------- */
+.contact{position:relative;overflow:hidden;background:var(--d-surface);color:var(--d-ink)}
+.contact::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:repeating-linear-gradient(135deg,var(--d-accent) 0 14px,#11181E 14px 28px)}
+.contact h2{color:var(--d-ink)}
+.contact-grid{display:grid;gap:48px}
+@media (min-width:1024px){.contact-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;align-items:start}}
+.contact-main{min-width:0}
+.who{margin-top:32px;color:var(--d-ink-muted)}
+.who b{color:var(--d-ink)}
+.reach{margin:16px 0 0;display:grid;border-top:1px solid var(--d-line)}
+.reach>div{display:grid;gap:6px;padding:16px 0;border-bottom:1px solid var(--d-line)}
+.reach dt{font-size:.75rem;font-weight:600;letter-spacing:.06em;color:var(--d-ink-muted)}
+.reach dd{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;min-width:0}
+.big{min-width:0;font-family:var(--font-mono);font-weight:500;font-size:clamp(1.15rem,.85rem + 1.4vw,1.9rem);color:#fff;text-decoration:none;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.big:hover{color:var(--d-brand)}
+.big.sub{font-size:clamp(1rem,.9rem + .5vw,1.2rem);color:var(--d-ink-muted)}
+.panel{padding:24px 28px;border:1px solid var(--d-line);border-radius:4px;background:var(--d-raised)}
+.panel h3{margin-bottom:12px;font-size:1.125rem;font-weight:600;color:var(--d-ink)}
+.check{list-style:none;margin:0;padding:0}
+.check li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--d-line);font-size:.9375rem;color:var(--d-ink)}
+.check li::before{content:"";width:14px;height:14px;margin-top:6px;border:1.5px solid var(--d-brand);border-radius:2px}
+.check small{display:block;font-size:.8125rem;color:var(--d-ink-muted)}
+
+/* ---------- footer (brand-deep title block) ---------- */
+.site-footer{padding-block:8px 48px;background:var(--brand-deep);color:var(--deep-muted)}
+.foot-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding-block:32px 28px}
+.foot-top .logo{width:220px}
+.foot-nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.foot-nav a{font-size:.875rem;color:var(--deep-muted);text-decoration:none}
+.foot-nav a:hover{color:#fff}
+.tblock{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--deep-line);border-left:1px solid var(--deep-line)}
+.tblock>div{display:grid;gap:2px;align-content:start;min-width:0;padding:10px 12px 12px;border-right:1px solid var(--deep-line);border-bottom:1px solid var(--deep-line)}
+.tblock dt{font-size:.6875rem;color:var(--deep-muted)}
+.tblock dd{margin:0;font-size:.8125rem;color:#fff;overflow-wrap:anywhere}
+.tblock .w2{grid-column:span 2}
+.tblock .w2m{grid-column:span 2}
+@media (min-width:1000px){.tblock{grid-template-columns:repeat(4,minmax(0,1fr))}.tblock .w2m{grid-column:auto}}
+.copyright{margin-top:16px;font-size:.75rem;color:var(--deep-muted)}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="ss-logo" viewBox="0 0 5776 568"><g id="ss-logo-symbol" style="fill:var(--lg-sym,#004099)" transform="translate(0,568) scale(0.1,-0.1)"><path d="M14731 5341 c-10 -10 -24 -42 -30 -70 -33 -154 -136 -188 -298 -100 -72 39 -83 42 -107 31 -38 -17 -41 -35 -17 -108 19 -57 20 -68 7 -97 -34 -81 -105 -112 -235 -102 -88 6 -95 5 -117 -16 -41 -38 -21 -115 41 -155 53 -34 70 -114 40 -178 -18 -37 -54 -61 -110 -70 -81 -14 -106 -27 -121 -62 -25 -61 9 -105 103 -130 156 -42 184 -176 59 -278 -60 -50 -65 -98 -15 -141 30 -25 35 -26 113 -19 95 7 159 -15 202 -71 29 -38 30 -56 7 -136 l-17 -62 23 -18 c31 -25 45 -24 118 10 83 40 138 47 205 27 73 -21 96 -48 109 -127 11 -74 33 -99 84 -99 45 0 71 34 80 106 11 87 43 117 132 122 61 4 79 0 141 -27 83 -36 95 -38 122 -11 17 17 20 32 18 99 -2 146 42 187 199 183 104 -2 104 -2 135 28 38 38 33 65 -23 128 -99 113 -65 229 83 284 133 48 133 174 0 193 -147 20 -184 142 -76 250 68 68 75 116 22 160 -30 25 -37 27 -83 19 -143 -22 -201 -6 -239 70 -17 35 -17 41 -2 106 18 81 10 112 -35 130 -35 15 -60 7 -131 -43 -50 -36 -64 -40 -117 -41 -94 -1 -128 35 -146 157 -11 70 -80 102 -124 58z m314 -391 c204 -102 243 -140 304 -292 16 -40 39 -93 51 -116 60 -115 48 -248 -39 -442 -85 -191 -102 -210 -234 -276 -127 -65 -291 -124 -340 -124 -51 0 -233 57 -312 98 -142 73 -269 232 -319 401 -21 71 -21 246 -1 325 51 195 204 366 406 452 124 53 130 54 234 51 l100 -3 150 -74z"></path><path d="M1606 5285 c-60 -8 -136 -23 -168 -35 -33 -12 -94 -32 -136 -45 -322 -97 -610 -297 -800 -553 -82 -111 -165 -254 -187 -322 -9 -30 -28 -84 -42 -119 -50 -130 -64 -398 -33 -647 44 -349 371 -745 775 -939 202 -97 290 -134 340 -145 28 -5 95 -23 150 -40 55 -16 145 -38 200 -50 95 -19 166 -35 343 -79 305 -76 583 -212 715 -350 203 -212 246 -401 142 -619 -105 -221 -263 -356 -535 -454 -103 -37 -531 -43 -657 -9 -151 41 -386 184 -501 306 -174 184 -226 276 -271 484 -42 193 -33 189 -466 193 -359 3 -355 3 -432 -55 -41 -31 -62 -87 -32 -87 20 0 50 -90 65 -197 9 -59 25 -129 35 -155 10 -27 28 -72 39 -100 53 -137 196 -402 250 -463 30 -33 89 -102 131 -151 71 -84 260 -242 419 -350 127 -86 387 -193 542 -222 114 -22 168 -44 168 -67 0 -13 51 -15 370 -15 319 0 370 2 370 15 0 24 53 44 176 65 104 17 342 89 369 111 6 4 40 22 75 40 230 114 439 304 617 561 135 194 165 256 214 445 49 188 63 383 36 503 -41 184 -91 349 -127 423 -93 189 -301 427 -476 545 -104 70 -429 225 -519 248 -33 8 -86 26 -118 40 -32 14 -102 34 -155 45 -53 11 -128 30 -167 43 -38 13 -104 30 -145 36 -41 7 -104 23 -140 36 -36 12 -101 32 -146 43 -44 10 -107 33 -140 49 -32 16 -77 35 -99 42 -77 25 -288 153 -358 219 -90 83 -164 260 -152 365 27 246 205 458 440 527 39 12 109 36 157 55 113 45 183 51 323 30 227 -35 304 -62 442 -154 50 -34 115 -72 145 -85 29 -13 73 -41 98 -62 83 -69 100 -68 199 18 126 111 215 114 371 13 135 -88 197 -100 247 -50 76 76 -61 374 -285 615 -161 174 -463 366 -660 421 -41 11 -103 31 -138 44 -130 49 -616 70 -878 39z"></path><path d="M6089 5289 c-58 -4 -123 -12 -145 -18 -465 -111 -850 -365 -1050 -691 -175 -284 -212 -403 -221 -707 -8 -257 22 -419 109 -588 95 -186 208 -339 305 -415 347 -271 500 -345 928 -449 44 -11 118 -29 165 -40 47 -12 148 -34 225 -51 145 -30 370 -102 511 -162 237 -102 440 -324 495 -541 45 -179 -120 -476 -346 -624 -146 -96 -250 -127 -470 -143 -284 -20 -398 -9 -503 51 -29 16 -75 38 -102 49 -80 32 -228 128 -301 197 -138 131 -277 386 -318 585 -23 111 -36 114 -422 124 -484 11 -485 11 -443 -231 16 -95 144 -492 194 -603 49 -108 317 -431 459 -553 239 -207 495 -339 769 -398 101 -22 157 -45 166 -67 5 -12 66 -14 388 -14 375 0 383 0 396 20 17 28 46 38 178 60 62 10 129 27 151 38 21 11 56 25 78 32 71 23 229 107 336 178 101 69 249 187 249 201 0 4 39 49 86 101 164 180 193 227 290 479 162 415 80 949 -199 1296 -213 266 -481 444 -830 551 -44 13 -107 34 -140 48 -34 13 -88 29 -121 36 -32 7 -95 24 -140 40 -44 15 -128 35 -186 43 -58 9 -134 27 -170 40 -36 14 -92 30 -125 37 -134 27 -326 114 -435 196 -295 222 -366 426 -239 683 78 158 209 266 416 343 188 70 193 71 293 70 293 -1 600 -133 744 -321 71 -93 152 -263 181 -380 46 -191 33 -186 445 -186 351 1 371 4 410 67 35 54 24 259 -19 388 -77 230 -267 569 -397 708 -164 176 -482 383 -669 436 -33 10 -90 28 -127 41 -135 49 -527 69 -849 44z"></path><path d="M10625 5294 c-201 -20 -244 -27 -344 -59 -62 -19 -120 -35 -129 -35 -41 0 -357 -165 -449 -235 -100 -76 -295 -269 -342 -339 -112 -167 -219 -434 -242 -603 -15 -120 -7 -447 14 -518 44 -148 143 -334 272 -507 139 -188 544 -438 840 -520 39 -10 93 -28 122 -38 28 -11 95 -26 147 -35 52 -8 126 -27 163 -41 37 -14 119 -34 181 -45 62 -10 128 -25 147 -33 19 -8 79 -27 132 -41 54 -14 108 -32 120 -41 13 -8 57 -28 99 -44 209 -80 422 -278 469 -435 33 -107 27 -279 -13 -380 -77 -198 -319 -398 -557 -460 -151 -39 -501 -45 -630 -10 -210 56 -515 267 -626 432 -78 115 -148 273 -165 373 -29 163 -18 159 -439 151 -370 -8 -389 -11 -418 -74 -31 -64 -16 -247 29 -362 13 -33 32 -97 43 -142 24 -99 74 -206 138 -294 26 -37 81 -113 122 -170 94 -133 117 -156 286 -302 187 -161 394 -290 530 -330 28 -8 74 -24 104 -36 29 -12 97 -30 150 -40 111 -22 169 -43 177 -66 9 -23 722 -23 731 0 9 25 55 43 154 61 117 20 336 92 443 146 202 101 347 214 508 398 195 221 246 315 339 623 44 146 63 341 49 497 -16 176 -172 539 -292 680 -185 216 -422 390 -638 470 -41 15 -97 37 -125 48 -76 32 -201 72 -290 94 -44 11 -123 33 -175 48 -52 16 -136 36 -187 45 -50 8 -111 22 -135 31 -24 8 -83 24 -133 35 -49 11 -110 29 -135 41 -25 11 -70 30 -101 43 -82 33 -256 139 -325 197 -109 94 -161 183 -175 304 -28 249 47 405 269 561 294 205 702 204 1052 -5 99 -59 136 -95 218 -217 88 -132 140 -243 163 -348 34 -160 28 -158 454 -154 362 3 366 4 391 62 42 102 -17 405 -114 585 -220 407 -334 553 -570 729 -77 57 -343 185 -437 211 -44 12 -100 30 -125 41 -72 33 -234 51 -480 54 -124 1 -243 1 -265 -1z"></path></g><g id="ss-logo-wordmark" style="fill:var(--lg-word,#231816)"><path d="M1801.9606115719555 255.73154720151203C1802.4975171689316 357.20670502997064 1830.953513808658 441.5008837551981 1881.4226399243994 513.4462337499782H1934.0393884280445C1896.9929022367023 459.7556740523811 1861.5571328362882 351.8376490602109 1861.5571328362882 255.73154720151203C1861.5571328362882 160.16235093978915 1896.9929022367023 51.70742035064296 1934.0393884280445 -1.4462337499782052H1881.4226399243994C1830.953513808658 70.49911624480194 1802.4975171689316 154.79329497002942 1801.9606115719555 255.73154720151203Z"></path><path d="M2419.3259363646844 278.0699115823952H1980.6740636353159V319.411642549545H2173.9600785466655V487.463094403024H2223.892299065431V319.411642549545H2419.3259363646844ZM2377.9842053975344 35.38858174925616H2021.4788890054897V76.19340711942999H2171.2755505617856C2169.3963809723696 135.7899283837628 2095.3034085896857 188.94358248438397 2005.3717210962104 201.2924112148313L2024.7003225873455 241.56033098802914C2102.551634148861 229.2115022575818 2170.470192166322 190.28584647682388 2200.268452798488 135.25302278678686C2229.2613550351907 190.28584647682388 2297.448365851139 229.2115022575818 2376.3734886066068 241.56033098802914L2395.1651845007655 201.2924112148313C2304.1596858133385 188.94358248438397 2230.0667134306545 135.7899283837628 2229.2613550351907 76.19340711942999H2377.9842053975344Z"></path><path d="M2598.0393884280443 255.73154720151203C2597.5024828310684 154.79329497002942 2569.046486191342 70.49911624480194 2518.5773600756006 -1.4462337499782052H2465.9606115719553C2503.007097763297 51.70742035064296 2538.4428671637115 160.16235093978915 2538.4428671637115 255.73154720151203C2538.4428671637115 351.8376490602109 2503.007097763297 459.7556740523811 2465.9606115719553 513.4462337499782H2518.5773600756006C2569.046486191342 441.5008837551981 2597.5024828310684 357.20670502997064 2598.0393884280443 255.73154720151203Z"></path><path d="M3007.1137326472867 49.34812727063144V23.039753018808824H2953.9600785466655V49.34812727063144C2953.4231729496896 113.776798907748 2876.1087669851495 173.3733201720808 2781.613381917379 185.72214890252815L2802.0157946024656 227.6007854666539C2880.1355589624695 214.98350393771858 2949.1279281738816 174.44713136603275 2980.805358395464 117.53513808657976C3011.677430221582 174.17867856754475 3080.9382522314827 214.98350393771858 3159.5949221884625 227.6007854666539L3179.4604292765734 185.72214890252815C3084.9650442088023 173.3733201720808 3006.5768270503104 113.239893310772 3007.1137326472867 49.34812727063144ZM3199.3259363646844 274.84847800053933H2760.6740636353156V316.72711456466516H2953.9600785466655V488.0H3003.892299065431V316.72711456466516H3199.3259363646844Z"></path><path d="M3426.201739367834 78.87793510430987V33.77786495832828H3375.7326132520925V81.02555749221375C3375.1957076551166 153.50781308396984 3330.632543106111 217.39957912411043 3253.855042738547 243.70795337593304L3281.2372281843213 284.51277874610685C3339.2230326577264 263.57346046404393 3381.1016692218523 220.88946550445425 3402.040987503915 165.85664181441717C3422.980305785978 213.90969274376664 3461.9059615667356 250.95617893510865 3514.791162868869 270.01632762775563L3542.7102539116195 230.28531345153374C3469.6910927228873 206.661467184591 3426.201739367834 146.52804032328226 3426.201739367834 78.87793510430987ZM3656.534240470525 6.932585109529668H3605.528208757808V104.64940375915648H3504.0530509293494V146.52804032328226H3605.528208757808V290.9556459098185H3656.534240470525ZM3495.462561377734 304.37828583421776C3394.5243091462517 304.37828583421776 3332.243259897039 337.666432846728 3332.780165494015 396.1891429171089C3332.243259897039 454.1749473905138 3394.5243091462517 487.463094403024 3495.462561377734 486.926188806048C3596.4008136092166 487.463094403024 3658.1449572614533 454.1749473905138 3658.1449572614533 396.1891429171089C3658.1449572614533 337.666432846728 3596.4008136092166 304.37828583421776 3495.462561377734 304.37828583421776ZM3495.462561377734 344.10930001043965C3565.797194581586 344.10930001043965 3607.675831145712 362.90099590459863 3607.675831145712 396.1891429171089C3607.675831145712 428.40347873566714 3565.797194581586 446.65826903285017 3495.462561377734 446.65826903285017C3425.1279281738816 446.65826903285017 3383.2492916097563 428.40347873566714 3383.2492916097563 396.1891429171089C3383.2492916097563 362.90099590459863 3425.1279281738816 344.10930001043965 3495.462561377734 344.10930001043965Z"></path><path d="M3931.3291345164253 129.34706122005116V47.20050488272756H3879.786197206732V129.34706122005116C3879.786197206732 221.15791830294225 3826.632543106111 312.96877538583334 3750.928853932499 346.79382799531953L3782.069378557105 389.74627575339724C3839.786730232022 361.55873191215875 3884.0814419825397 303.3044746402659 3906.6314770555305 232.96984143641362C3928.9130593300333 298.74077706597006 3972.670865483575 352.69978956205523 4027.9721419721 379.0081638138778L4058.5757609997304 338.74024404067995C3983.9458830200706 305.45209702816976 3930.7922289194494 217.39957912411043 3931.3291345164253 129.34706122005116ZM4153.071146067501 6.932585109529668H4102.065114354784V489.0738111939519H4153.071146067501Z"></path><path d="M4488.160751863918 75.11959592547805V38.61001533111198H4434.470192166322V75.11959592547805C4434.470192166322 153.50781308396984 4351.249824635046 227.06387986967792 4259.975873149131 244.24485897290901L4282.525908222122 286.6604011340107C4359.571861388174 269.4794220307797 4430.174947390514 219.01029591503834 4461.8523776120965 151.89709629304195C4492.992902236702 219.54720151201434 4563.864441037531 270.01632762775563 4640.641941405094 286.6604011340107L4664.265787672038 244.24485897290901C4571.91802499217 227.6007854666539 4488.160751863918 153.50781308396984 4488.160751863918 75.11959592547805ZM4684.131294760148 382.2295973957336H4243.868705239852V424.6451395568354H4684.131294760148Z"></path><path d="M4984.724982463505 37.53620413716004H4801.640173894699V269.4794220307797H4832.780698519305C4909.021293289893 269.4794220307797 4954.6582690328505 267.3317996428758 5009.959545521376 257.1305933003323L5005.127395148592 216.86267352713446C4956.000533025291 225.721615877238 4913.853443662677 228.13769106362986 4850.4985832195125 228.67459666060583V171.22569778417693H4965.933286569346V131.49468360795504H4850.4985832195125V79.41484070128581H4984.724982463505ZM5190.359826105302 6.932585109529668H5142.038322377464V295.78779628260224H5190.359826105302ZM5095.864441037531 14.986169064169246H5047.542937309694V126.12562763819534H4987.946416045361V167.4673586053451H5047.542937309694V292.0294571037705H5095.864441037531ZM5190.359826105302 317.2640201616411H4868.753373516695V482.0940384332643H5190.359826105302ZM4919.759405229413 357.53193993483893H5140.427605586537V440.7523074661145H4919.759405229413Z"></path><path d="M5496.160751863918 75.11959592547805V38.61001533111198H5442.470192166322V75.11959592547805C5442.470192166322 153.50781308396984 5359.249824635046 227.06387986967792 5267.975873149131 244.24485897290901L5290.525908222122 286.6604011340107C5367.571861388174 269.4794220307797 5438.174947390514 219.01029591503834 5469.8523776120965 151.89709629304195C5500.992902236702 219.54720151201434 5571.864441037531 270.01632762775563 5648.641941405094 286.6604011340107L5672.265787672038 244.24485897290901C5579.91802499217 227.6007854666539 5496.160751863918 153.50781308396984 5496.160751863918 75.11959592547805ZM5692.131294760148 382.2295973957336H5251.868705239852V424.6451395568354H5692.131294760148Z"></path></g></symbol></svg>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="수성시스템스 처음으로"><svg class="logo" viewBox="0 0 5776 568" aria-hidden="true" focusable="false"><use href="#ss-logo"/></svg></a>
+    <nav class="nav" aria-label="주요 메뉴">
+      <a href="#about">회사소개</a>
+      <a href="#business">사업분야</a>
+      <a href="#process">일하는 방식</a>
+      <a href="#clients">고객사</a>
+      <a href="#company">오시는 길</a>
+      <a class="nav-cta" href="#contact">견적 문의</a>
+    </nav>
+    <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mnav">
+      <span class="bars" aria-hidden="true"></span><span class="menu-label">메뉴</span>
+    </button>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="모바일 메뉴" hidden>
+    <div class="wrap mnav-list">
+      <a href="#about">회사소개</a>
+      <a href="#business">사업분야</a>
+      <a href="#process">일하는 방식</a>
+      <a href="#clients">고객사</a>
+      <a href="#company">오시는 길</a>
+      <a href="#contact">견적·기술 문의</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero deep" aria-labelledby="hero-h">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="kicker"><i aria-hidden="true"></i>FACTORY AUTOMATION · DAEGU · GUMI</p>
+        <h1 id="hero-h"><span class="l1">도면 첫 장부터</span><span class="l2">시운전까지.</span></h1>
+        <p class="hero-lead">수성시스템스는 자동차·이차전지·소재 공장의 조립, 반송, 가공 설비를 설계하고 구미 공장에서 제작해 고객 현장에 설치합니다. 가동 중인 라인의 개조와 증설도 맡습니다.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">견적·기술 문의<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-ghost" href="#business">사업분야 보기</a>
+        </div>
+        <dl class="hero-facts">
+          <div><dt>DESIGN</dt><dd>3D 기계설계 · 제작도면 · BOM</dd></div>
+          <div><dt>BUILD</dt><dd>구미 공장 제작 · 조립 · 검수</dd></div>
+          <div><dt>INSTALL</dt><dd>국내 · 해외 현장 시운전</dd></div>
+        </dl>
+      </div>
+
+      <figure class="vp-fig">
+        <div class="vp" id="vp">
+          <div class="stage" id="stage"><canvas id="scene" role="img" aria-label="6공정 팔레트 순환 조립라인 3D 예시 모델. 설계, 제작, 설치, 가동 순서로 조립된 뒤 팔레트가 공정을 돌며 가동됩니다."></canvas></div>
+          <div class="vp-fallback" aria-hidden="true">
+            <svg viewBox="40 20 560 380">
+              <path class="fb-bed" d="M80 150H560V270H80Z"/>
+              <rect class="fb-l" x="63" y="133" width="514" height="154"/>
+              <rect class="fb-l" x="97" y="167" width="446" height="86"/>
+              <rect class="fb-m" x="60" y="130" width="40" height="40"/><rect class="fb-m" x="540" y="130" width="40" height="40"/>
+              <rect class="fb-m" x="540" y="250" width="40" height="40"/><rect class="fb-m" x="60" y="250" width="40" height="40"/>
+              <rect class="fb-m" x="170" y="40" width="60" height="32"/><text class="fb-t" x="200" y="62" text-anchor="middle">#10</text>
+              <rect class="fb-m" x="284" y="40" width="72" height="60"/><text class="fb-t" x="320" y="76" text-anchor="middle">#20</text>
+              <path class="fb-d" d="M392 128V34H536V128"/><text class="fb-t" x="402" y="54">#30</text><circle class="fb-m" cx="440" cy="80" r="16"/>
+              <rect class="fb-m" x="404" y="300" width="72" height="60"/><text class="fb-t" x="440" y="336" text-anchor="middle">#40</text>
+              <rect class="fb-m" x="284" y="300" width="72" height="60"/><text class="fb-t" x="320" y="336" text-anchor="middle">#50</text>
+              <rect class="fb-m" x="170" y="348" width="60" height="32"/><text class="fb-t" x="200" y="370" text-anchor="middle">#60</text>
+              <rect class="fb-p" x="180" y="136" width="40" height="28" rx="2"/><rect class="fb-p" x="300" y="136" width="40" height="28" rx="2"/><rect class="fb-p" x="420" y="136" width="40" height="28" rx="2"/>
+              <rect class="fb-p" x="420" y="256" width="40" height="28" rx="2"/><rect class="fb-p" x="300" y="256" width="40" height="28" rx="2"/><rect class="fb-p" x="180" y="256" width="40" height="28" rx="2"/>
+            </svg>
+          </div>
+          <div class="hud-top">
+            <div class="hud-left">
+              <span class="file"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 14 5v6l-6 3.2L2 11V5z" fill="none" stroke="#6f9fe3" stroke-width="1.3" stroke-linejoin="round"/><path d="M2 5l6 3.2L14 5M8 8.2v6" fill="none" stroke="#6f9fe3" stroke-width="1.3" stroke-linejoin="round"/></svg>SS-LINE-01.iam<span class="tag">예시 모델</span></span>
+              <span class="hint" id="hint">드래그해서 돌려보기</span>
+            </div>
+            <div class="vcube-wrap" aria-hidden="true">
+              <div class="vcube" id="vcube"><span class="f1">FRONT</span><span class="f2">BACK</span><span class="f3">RIGHT</span><span class="f4">LEFT</span><span class="f5">TOP</span><span class="f6">BOTTOM</span></div>
+            </div>
+          </div>
+          <svg class="triad" id="triad" viewBox="-28 -28 56 56" aria-hidden="true">
+            <line x1="0" y1="0" x2="19" y2="0" stroke="#FF6A6A"/>
+            <line x1="0" y1="0" x2="0" y2="-19" stroke="#4CD98A"/>
+            <line x1="0" y1="0" x2="-10" y2="10" stroke="#6FB4FF"/>
+            <text x="25" y="3" fill="#FF8A8A">X</text>
+            <text x="0" y="-22" fill="#6EE3A2">Y</text>
+            <text x="-14" y="16" fill="#8CC4FF">Z</text>
+          </svg>
+          <div class="hud-bottom">
+            <ol class="phases" id="phases">
+              <li><span><b>설계</b><small>DESIGN</small></span></li>
+              <li><span><b>제작</b><small>BUILD</small></span></li>
+              <li><span><b>설치</b><small>INSTALL</small></span></li>
+              <li><span><b>가동</b><small>RUN</small></span></li>
+            </ol>
+            <div class="status">
+              <span><span class="lamp" id="lamp"></span><span class="state" id="state">설계 중</span></span>
+              <span>생산 <b id="count">0000</b></span>
+              <button type="button" class="replay" id="replay" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M10 6a4 4 0 1 1-1.2-2.85M10 1.6v2.6H7.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>다시 보기</button>
+            </div>
+          </div>
+        </div>
+        <figcaption class="vp-cap">예시 모델 · 6공정 팔레트 순환 조립라인 · 패스라인 900mm · 팔레트 10대</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <p class="eyebrow">ABOUT</p>
+      <div class="about-grid">
+        <h2 class="statement" id="about-h">설계·제작·설치를<br><em>한 회사가 끝까지</em> 책임집니다.</h2>
+        <div class="about-text">
+          <p>주식회사 수성시스템스는 대구에 본사를, 구미에 제작 공장을 둔 기계설계·공장자동화 설비 전문 기업입니다.</p>
+          <p>고객의 제품 도면과 생산 계획에서 출발해 공정을 나누고, 설비를 설계·제작해 현장 시운전까지 마칩니다. 납품한 설비의 개조와 증설도 이어서 맡습니다.</p>
+        </div>
+      </div>
+      <ul class="strengths">
+        <li><span class="k">ONE TEAM</span><h3>설계부터 설치까지 한 팀</h3><p>견적, 설계, 제작, 설치를 나누어 맡기지 않습니다. 사양이 바뀌면 도면과 설비에 바로 반영됩니다.</p></li>
+        <li><span class="k">FACTORY</span><h3>구미 제작 공장</h3><p>가공품 제작과 조립, 출하 전 검수(FAT)를 공장에서 직접 진행합니다.</p></li>
+        <li><span class="k">FIELD</span><h3>국내·해외 현장 대응</h3><p>국내 고객사 현장은 물론 인도 등 해외 공장의 설치와 현장 트러블슈팅을 경험했습니다.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band business" id="business" aria-labelledby="business-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">CAPABILITIES</p>
+        <h2 id="business-h">사업분야</h2>
+        <p class="sec-lead">단일 전용기부터 여러 공정을 잇는 라인까지, 제품과 생산량에 맞춰 설계합니다.</p>
+      </div>
+      <div class="biz-grid">
+        <article class="biz">
+          <div class="biz-media" data-render="assembly">
+            <svg class="biz-ic" viewBox="0 0 48 48" aria-hidden="true"><path class="ic" d="M4 41H44"/><rect class="ic" x="11" y="32" width="26" height="6" rx="1"/><rect class="ic-y" x="15" y="25" width="18" height="7" rx="1"/><rect class="ic" x="19" y="5" width="10" height="11" rx="1.5"/><path class="ic" d="M24 16V25M21 20.5H27"/></svg>
+            <img alt="" decoding="async" hidden>
+          </div>
+          <div class="biz-body">
+            <h3>조립 자동화 라인</h3>
+            <p>너트런너 자동체결, 실란트 도포, 기밀검사, 비전 검사를 공정 순서대로 묶은 인라인 조립 설비입니다. 목표 C/T에 맞춰 공정을 나누고, 자동화 수준별 비교안을 함께 제시합니다.</p>
+            <ul class="tags"><li>배터리 모듈·팩</li><li>전동화 부품</li><li>내·외장 부품</li></ul>
+          </div>
+        </article>
+        <article class="biz">
+          <div class="biz-media" data-render="handling">
+            <svg class="biz-ic" viewBox="0 0 48 48" aria-hidden="true"><path class="ic" d="M4 39H44"/><circle class="ic" cx="9" cy="33" r="3"/><circle class="ic" cx="19" cy="33" r="3"/><circle class="ic" cx="29" cy="33" r="3"/><circle class="ic" cx="39" cy="33" r="3"/><rect class="ic-y" x="13" y="19" width="17" height="11" rx="1"/><path class="ic" d="M33 13H43M40 10L43 13L40 16"/></svg>
+            <img alt="" decoding="async" hidden>
+          </div>
+          <div class="biz-body">
+            <h3>반송·물류 설비</h3>
+            <p>체인·롤러·파워롤러 컨베이어와 리프터, 턴테이블, 스태커 크레인 자동창고로 공정 사이의 이동을 설계합니다. 모터 용량과 체인 규격은 부하 계산으로 정합니다.</p>
+            <ul class="tags"><li>시트 컨베이어</li><li>미니로드 AS/RS</li><li>공정 간 연결 컨베이어</li></ul>
+          </div>
+        </article>
+        <article class="biz">
+          <div class="biz-media" data-render="special">
+            <svg class="biz-ic" viewBox="0 0 48 48" aria-hidden="true"><circle class="ic" cx="24" cy="24" r="17"/><circle class="ic-y" cx="24" cy="24" r="6"/><rect class="ic" x="21.5" y="8" width="5" height="9" rx="1"/><rect class="ic" x="21.5" y="8" width="5" height="9" rx="1" transform="rotate(120 24 24)"/><rect class="ic" x="21.5" y="8" width="5" height="9" rx="1" transform="rotate(240 24 24)"/></svg>
+            <img alt="" decoding="async" hidden>
+          </div>
+          <div class="biz-body">
+            <h3>가공·전용 설비</h3>
+            <p>가공기와 칩 배출, 집진, 이송 장치를 하나로 묶은 가공 라인과, 중량물을 회전·승강시키는 포지셔너 같은 전용기를 만듭니다.</p>
+            <ul class="tags"><li>가공·이송 라인</li><li>중량물 포지셔너</li><li>리프팅 장치</li></ul>
+          </div>
+        </article>
+        <article class="biz">
+          <div class="biz-media" data-render="robot">
+            <svg class="biz-ic" viewBox="0 0 48 48" aria-hidden="true"><path class="ic" d="M6 43H26"/><rect class="ic" x="10" y="37" width="12" height="6" rx="1"/><circle class="ic" cx="16" cy="33" r="3"/><path class="ic" d="M17.2 30.2L22.4 17.6"/><circle class="ic" cx="23.5" cy="15" r="2.6"/><path class="ic" d="M26 16.2L35 21.5M35 21.5V26M32 26H38"/><rect class="ic-y" x="31.5" y="28" width="7" height="6" rx="1"/></svg>
+            <img alt="" decoding="async" hidden>
+          </div>
+          <div class="biz-body">
+            <h3>로봇·비전 셀</h3>
+            <p>로봇과 비전을 조합해 취출, 적재, 체결, 부착 작업을 자동화합니다. 볼트 해체처럼 대상 형상이 일정하지 않은 작업도 컨셉 단계부터 함께 검토합니다.</p>
+            <ul class="tags"><li>로봇 취출·적재</li><li>너트런너 엔드이펙터</li><li>비전 위치 보정</li></ul>
+          </div>
+        </article>
+        <article class="biz">
+          <div class="biz-media" data-render="retrofit">
+            <svg class="biz-ic" viewBox="0 0 48 48" aria-hidden="true"><path class="ic" d="M3 35H45"/><rect class="ic" x="4" y="19" width="11" height="12" rx="1"/><rect class="ic" x="18" y="19" width="11" height="12" rx="1"/><rect class="ic-d" x="32" y="19" width="12" height="12" rx="1"/><path class="ic" d="M38 22.5V27.5M35.5 25H40.5"/></svg>
+            <img alt="" decoding="async" hidden>
+          </div>
+          <div class="biz-body">
+            <h3>설비 개조·증설</h3>
+            <p>가동 중인 라인에 공정을 추가하거나 설비를 옮기고 바꿉니다. 라인 정지 시간을 줄이도록 작업 순서와 일정을 먼저 협의합니다.</p>
+            <ul class="tags"><li>컨베이어 개조</li><li>공정 추가</li><li>배기·환기 설비</li></ul>
+          </div>
+        </article>
+        <article class="biz">
+          <div class="biz-media" data-render="export">
+            <svg class="biz-ic" viewBox="0 0 48 48" aria-hidden="true"><circle class="ic" cx="21" cy="27" r="16"/><path class="ic" d="M5 27H37M21 11C15.5 16 15.5 38 21 43M21 11C26.5 16 26.5 38 21 43"/><path class="ic-y" d="M37 3.5A6.5 6.5 0 0 0 30.5 10C30.5 15 37 21 37 21S43.5 15 43.5 10A6.5 6.5 0 0 0 37 3.5Z"/><circle class="ic-f" cx="37" cy="10" r="2"/></svg>
+            <img alt="" decoding="async" hidden>
+          </div>
+          <div class="biz-body">
+            <h3>해외 설치·시운전</h3>
+            <p>해외 공장 설치와 현장 트러블슈팅 경험이 있습니다. 국내에서 제작해 보낼 범위와 현지에서 제작할 범위를 나눠 견적합니다.</p>
+            <ul class="tags"><li>인도 현장</li><li>국내·현지 제작 분리 견적</li></ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band process dark" id="process" aria-labelledby="process-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">PROCESS</p>
+        <h2 id="process-h">일하는 방식</h2>
+        <p class="sec-lead">공정에 번호를 매기듯 일을 단계로 나누고, 단계마다 결과물을 남깁니다.</p>
+      </div>
+      <div class="rail-wrap">
+        <span class="shuttle" aria-hidden="true"></span>
+        <ol class="rail">
+          <li class="st"><span class="node" aria-hidden="true"></span><span class="st-no">#10</span><h3>사양 검토</h3><p>사양서와 제품 도면을 받아 공정을 나누고 C/T를 산출합니다.</p><p class="st-out"><span>OUTPUT</span>컨셉 레이아웃 · C/T 산출표 · 견적서</p></li>
+          <li class="st"><span class="node" aria-hidden="true"></span><span class="st-no">#20</span><h3>기계 설계</h3><p>3D 모델로 간섭과 동작 범위를 확인한 뒤 제작도면을 출도합니다.</p><p class="st-out"><span>OUTPUT</span>3D 모델 · 제작도면 · BOM</p></li>
+          <li class="st"><span class="node" aria-hidden="true"></span><span class="st-no">#30</span><h3>제작·조립</h3><p>구미 공장에서 가공품을 제작·조립하고, 출하 전에 동작과 사양을 검수합니다.</p><p class="st-out"><span>OUTPUT</span>조립 설비 · 출하 전 검수(FAT)</p></li>
+          <li class="st"><span class="node" aria-hidden="true"></span><span class="st-no">#40</span><h3>설치·시운전</h3><p>현장에 반입·설치한 뒤 Try-out을 거쳐 양산 라인으로 넘깁니다.</p><p class="st-out"><span>OUTPUT</span>현장 검수(SAT) · 양산 이관</p></li>
+          <li class="st"><span class="node" aria-hidden="true"></span><span class="st-no">#50</span><h3>사후관리</h3><p>가동 후 문제 대응과 개선, 개조·증설까지 이어서 맡습니다.</p><p class="st-out"><span>OUTPUT</span>A/S · 개선 · 증설</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="clients" aria-labelledby="clients-h">
+    <div class="wrap clients-grid">
+      <div>
+        <p class="eyebrow">CLIENTS</p>
+        <h2 id="clients-h">주요 고객사</h2>
+        <p class="sec-lead">자동차, 이차전지, 소재 분야 고객사의 생산 설비를 설계하고 만듭니다.</p>
+        <ul class="inds"><li>자동차</li><li>이차전지</li><li>소재</li></ul>
+      </div>
+      <div>
+        <ul class="logos" aria-label="주요 고객사, 회사명 일부 비공개">
+          <li>기<span class="mask">*</span></li>
+          <li>나<span class="mask">***</span></li>
+          <li>K<span class="mask">*****</span></li>
+          <li>포<span class="mask">*****</span></li>
+        </ul>
+        <p class="note">고객사명은 첫 글자만 표기합니다 · 가나다순</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band company" id="company" aria-labelledby="company-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">COMPANY</p>
+        <h2 id="company-h">회사개요 · 오시는 길</h2>
+      </div>
+      <div class="company-grid">
+        <figure class="plate" aria-label="회사 명판">
+          <span class="rivet r1" aria-hidden="true"></span><span class="rivet r2" aria-hidden="true"></span><span class="rivet r3" aria-hidden="true"></span><span class="rivet r4" aria-hidden="true"></span>
+          <div class="plate-head">
+            <svg class="logo logo-black plate-logo" viewBox="0 0 5776 568" role="img" aria-label="(주)수성시스템스"><use href="#ss-logo"/></svg>
+            <span class="plate-en">SUSEONG SYSTEMS CO., LTD.</span>
+          </div>
+          <dl class="plate-rows">
+            <div><dt>대표이사<small>CEO</small></dt><dd>강욱환</dd></div>
+            <div><dt>사업자등록번호<small>BIZ REG. NO.</small></dt><dd class="mono">481-87-03866</dd></div>
+            <div><dt>대표번호<small>TEL</small></dt><dd class="mono">010-6268-7881</dd></div>
+            <div><dt>사업분야<small>BUSINESS</small></dt><dd>기계설계 · 공장자동화설비 제작 · 설치 · 개조</dd></div>
+            <div><dt>본사<small>HEAD OFFICE</small></dt><dd>대구광역시 달서구 달서대로 559, 이앤씨이노비즈타워 608호</dd></div>
+            <div><dt>공장<small>FACTORY</small></dt><dd>경상북도 구미시 산동읍 첨단기업5로 134 C동</dd></div>
+            <div><dt>이메일<small>E-MAIL</small></dt><dd class="mono">mjchoi@suseongsystems.com</dd></div>
+          </dl>
+          <div class="plate-foot"><span>MADE IN KOREA</span><span>DAEGU · GUMI</span></div>
+        </figure>
+        <div class="sites">
+          <article class="site">
+            <h3>본사 <span>HEAD OFFICE</span></h3>
+            <p class="addr" id="addr-hq">대구광역시 달서구 달서대로 559, 이앤씨이노비즈타워 608호</p>
+            <div class="site-links">
+              <a class="chip" href="https://map.naver.com/p/search/%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C%20%EB%8B%AC%EC%84%9C%EA%B5%AC%20%EB%8B%AC%EC%84%9C%EB%8C%80%EB%A1%9C%20559" target="_blank" rel="noopener noreferrer">네이버 지도</a>
+              <a class="chip" href="https://map.kakao.com/?q=%EB%8C%80%EA%B5%AC%EA%B4%91%EC%97%AD%EC%8B%9C%20%EB%8B%AC%EC%84%9C%EA%B5%AC%20%EB%8B%AC%EC%84%9C%EB%8C%80%EB%A1%9C%20559" target="_blank" rel="noopener noreferrer">카카오맵</a>
+              <button type="button" class="chip" data-copy="대구광역시 달서구 달서대로 559, 이앤씨이노비즈타워 608호" data-target="addr-hq">주소 복사</button>
+            </div>
+          </article>
+          <article class="site">
+            <h3>공장 <span>FACTORY</span></h3>
+            <p class="addr" id="addr-fac">경상북도 구미시 산동읍 첨단기업5로 134 C동</p>
+            <div class="site-links">
+              <a class="chip" href="https://map.naver.com/p/search/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84%20%EA%B5%AC%EB%AF%B8%EC%8B%9C%20%EC%82%B0%EB%8F%99%EC%9D%8D%20%EC%B2%A8%EB%8B%A8%EA%B8%B0%EC%97%855%EB%A1%9C%20134" target="_blank" rel="noopener noreferrer">네이버 지도</a>
+              <a class="chip" href="https://map.kakao.com/?q=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84%20%EA%B5%AC%EB%AF%B8%EC%8B%9C%20%EC%82%B0%EB%8F%99%EC%9D%8D%20%EC%B2%A8%EB%8B%A8%EA%B8%B0%EC%97%855%EB%A1%9C%20134" target="_blank" rel="noopener noreferrer">카카오맵</a>
+              <button type="button" class="chip" data-copy="경상북도 구미시 산동읍 첨단기업5로 134 C동" data-target="addr-fac">주소 복사</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band contact dark" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-grid">
+      <div class="contact-main">
+        <p class="eyebrow">CONTACT</p>
+        <h2 id="contact-h">견적·기술 문의</h2>
+        <p class="sec-lead">도면이나 사양서를 보내주시면 검토한 뒤 연락드립니다.</p>
+        <p class="who">담당 <b>최만진</b> 전무이사</p>
+        <dl class="reach">
+          <div><dt>대표번호</dt><dd><a class="big" id="tel-1" href="tel:01062687881">010-6268-7881</a><button type="button" class="chip" data-copy="010-6268-7881" data-target="tel-1">복사</button></dd></div>
+          <div><dt>이메일</dt><dd><a class="big" id="mail-1" href="mailto:mjchoi@suseongsystems.com">mjchoi@suseongsystems.com</a><button type="button" class="chip" data-copy="mjchoi@suseongsystems.com" data-target="mail-1">복사</button></dd></div>
+          <div><dt>보조 이메일</dt><dd><a class="big sub" id="mail-2" href="mailto:suseong0701@naver.com">suseong0701@naver.com</a><button type="button" class="chip" data-copy="suseong0701@naver.com" data-target="mail-2">복사</button></dd></div>
+        </dl>
+      </div>
+      <div class="panel">
+        <h3>견적 요청 때 함께 보내주시면 좋은 자료</h3>
+        <ul class="check">
+          <li><div>제품 도면<small>2D·3D 파일 (DWG, STEP)</small></div></li>
+          <li><div>생산 수량과 목표 C/T</div></li>
+          <li><div>설치 공간 레이아웃과 반입 경로</div></li>
+          <li><div>희망 납기</div></li>
+          <li><div>구매품 메이커 지정 여부<small>로봇, PLC, 서보모터, LM가이드 등</small></div></li>
+          <li><div>견적 범위<small>기구부만 · 제어 포함 · 설치 포함</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer deep">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="#top" aria-label="수성시스템스 처음으로"><svg class="logo logo-white" viewBox="0 0 5776 568" aria-hidden="true" focusable="false"><use href="#ss-logo"/></svg></a>
+      <nav class="foot-nav" aria-label="하단 메뉴">
+        <a href="#about">회사소개</a><a href="#business">사업분야</a><a href="#process">일하는 방식</a><a href="#clients">고객사</a><a href="#company">오시는 길</a><a href="#contact">견적 문의</a>
+      </nav>
+    </div>
+    <dl class="tblock">
+      <div class="w2m"><dt>상호</dt><dd>주식회사 수성시스템스</dd></div>
+      <div><dt>대표이사</dt><dd>강욱환</dd></div>
+      <div><dt>사업자등록번호</dt><dd class="mono">481-87-03866</dd></div>
+      <div><dt>대표번호</dt><dd class="mono">010-6268-7881</dd></div>
+      <div class="w2"><dt>본사</dt><dd>대구광역시 달서구 달서대로 559, 이앤씨이노비즈타워 608호</dd></div>
+      <div class="w2"><dt>공장</dt><dd>경상북도 구미시 산동읍 첨단기업5로 134 C동</dd></div>
+      <div class="w2"><dt>이메일</dt><dd class="mono">mjchoi@suseongsystems.com</dd></div>
+      <div class="w2"><dt>DWG NO. · REV.</dt><dd class="mono">SS-WEB-001 · 03</dd></div>
+    </dl>
+    <p class="copyright">© 2026 Suseong Systems Co., Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  /* mobile menu */
+  const menuBtn = document.getElementById('menu-btn');
+  const mnav = document.getElementById('mnav');
+  if (menuBtn && mnav) {
+    const label = menuBtn.querySelector('.menu-label');
+    const setOpen = (open) => {
+      mnav.hidden = !open;
+      menuBtn.setAttribute('aria-expanded', String(open));
+      label.textContent = open ? '닫기' : '메뉴';
+    };
+    menuBtn.addEventListener('click', () => setOpen(mnav.hidden));
+    mnav.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+  }
+  /* copy buttons: clipboard first, text selection as fallback */
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-copy]');
+    if (!btn) return;
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+    const flash = (msg) => {
+      btn.textContent = msg;
+      btn.classList.add('done');
+      clearTimeout(btn._t);
+      btn._t = setTimeout(() => { btn.textContent = btn.dataset.label; btn.classList.remove('done'); }, 1800);
+    };
+    const selectText = () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) { flash('직접 복사해 주세요'); return; }
+      const range = document.createRange();
+      range.selectNodeContents(target);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      flash('선택됨');
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(btn.dataset.copy).then(() => flash('복사됨'), selectText);
+      } else {
+        selectText();
+      }
+    } catch (err) {
+      selectText();
+    }
+  });
+})();
+</script>
+<script src="js/three.min.js"></script>
+<script>
+(() => {
+  'use strict';
+  const T = window.THREE;
+  const vp = document.getElementById('vp');
+  const stage = document.getElementById('stage');
+  const canvas = document.getElementById('scene');
+  if (!vp || !stage || !canvas) return;
+  const noGL = () => vp.classList.add('no-gl');
+  if (!T) { noGL(); return; }
+
+  /* ---------- helpers ---------- */
+  const lin = (h) => new T.Color(h).convertSRGBToLinear();
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const span = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const mod = (a, n) => ((a % n) + n) % n;
+
+  /* ---------- materials ---------- */
+  const DEF = {
+    frame: ['#C8CED1', 0.12, 0.6],
+    alu: ['#AEB8C0', 0.55, 0.36],
+    dark: ['#2A333B', 0.3, 0.55],
+    black: ['#15191D', 0.2, 0.7],
+    steel: ['#A9B2B8', 0.9, 0.26],
+    robot: ['#ECEFEF', 0.05, 0.38],
+    yellow: ['#F2B400', 0.05, 0.48],
+    blue: ['#0B4FAE', 0.12, 0.42],
+    red: ['#C81E2B', 0.05, 0.45],
+    work: ['#C9D1D7', 0.82, 0.3],
+    cover: ['#3B4751', 0.35, 0.42],
+    tote: ['#3E5A6E', 0.05, 0.62],
+    wood: ['#C2935A', 0.0, 0.82],
+    floorMark: ['#E4AE00', 0.0, 0.7]
+  };
+  const LAMP = { lampR: ['#3B1414', '#FF4B4B'], lampY: ['#3A2E0A', '#FFC21A'], lampG: ['#0F3A22', '#38E07F'], okLamp: ['#0F3A22', '#38E07F'] };
+  const LINE_DESIGN = lin('#B5D2F0');
+  const LINE_SHADED = lin('#0B1218');
+
+  let fenceTexture = null;
+  function fenceTex() {
+    if (fenceTexture) return fenceTexture;
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const g = c.getContext('2d');
+    g.strokeStyle = 'rgb(58,66,74)';
+    g.lineWidth = 2.5;
+    for (let i = 0; i <= 128; i += 16) {
+      g.beginPath(); g.moveTo(i, 0); g.lineTo(i, 128); g.moveTo(0, i); g.lineTo(128, i); g.stroke();
+    }
+    fenceTexture = new T.CanvasTexture(c);
+    fenceTexture.wrapS = fenceTexture.wrapT = T.RepeatWrapping;
+    fenceTexture.encoding = T.sRGBEncoding;
+    return fenceTexture;
+  }
+
+  function makeMat(kind, mode) {
+    let m;
+    if (kind === 'glass') m = new T.MeshStandardMaterial({ color: lin('#D6E8F2'), metalness: 0, roughness: 0.05, transparent: true, opacity: 0.16, depthWrite: false });
+    else if (kind === 'mesh') m = new T.MeshStandardMaterial({ color: 0xffffff, map: fenceTex(), metalness: 0.3, roughness: 0.55, transparent: true, alphaTest: 0.3, side: T.DoubleSide, depthWrite: false });
+    else if (kind === 'ghost') m = new T.MeshStandardMaterial({ color: lin('#C3CDD4'), metalness: 0.05, roughness: 0.7, transparent: true, opacity: 0.3, depthWrite: false });
+    else if (kind === 'screen') m = new T.MeshStandardMaterial({ color: lin('#0C1C27'), emissive: lin('#4FB8F0'), emissiveIntensity: 0.9, roughness: 0.3, metalness: 0 });
+    else if (kind === 'ring') m = new T.MeshStandardMaterial({ color: lin('#E6F4FF'), emissive: lin('#D2ECFF'), emissiveIntensity: 1.4, roughness: 0.3, metalness: 0 });
+    else if (LAMP[kind]) m = new T.MeshStandardMaterial({ color: lin(LAMP[kind][0]), emissive: lin(LAMP[kind][1]), emissiveIntensity: 0, roughness: 0.3, metalness: 0 });
+    else {
+      const d = DEF[kind] || DEF.frame;
+      m = new T.MeshStandardMaterial({ color: lin(d[0]), metalness: d[1], roughness: d[2] });
+    }
+    m.envMapIntensity = 0.8;
+    m.userData.base = m.opacity;
+    m.userData.alwaysT = m.transparent;
+    if (!m.transparent) { m.polygonOffset = true; m.polygonOffsetFactor = 1; m.polygonOffsetUnits = 1; }
+    if (mode === 'hero') { m.transparent = true; m.opacity = 0; m.depthWrite = false; }
+    return m;
+  }
+
+  let CTX = null;
+  function ctxNew(mode) {
+    return {
+      mode, mats: {}, force: null,
+      line: new T.LineBasicMaterial({ color: (mode === 'hero' ? LINE_DESIGN : LINE_SHADED).clone(), transparent: true, opacity: mode === 'hero' ? 0 : 0.24, depthWrite: false, toneMapped: false })
+    };
+  }
+  function M(kind) {
+    if (CTX.force && kind !== 'glass' && kind !== 'mesh') kind = CTX.force;
+    return CTX.mats[kind] || (CTX.mats[kind] = makeMat(kind, CTX.mode));
+  }
+
+  /* ---------- geometry ---------- */
+  const gcache = new Map();
+  const cached = (k, f) => { let g = gcache.get(k); if (!g) { g = f(); gcache.set(k, g); } return g; };
+  const boxGeo = (w, h, d) => cached('b' + w + '|' + h + '|' + d, () => new T.BoxGeometry(w, h, d));
+  const cylGeo = (r, h, s) => cached('c' + r + '|' + h + '|' + s, () => new T.CylinderGeometry(r, r, h, s));
+  const torusGeo = (r, t) => cached('t' + r + '|' + t, () => new T.TorusGeometry(r, t, 10, 40));
+  function rrShape(w, h, r) {
+    const s = new T.Shape(), x = -w / 2, y = -h / 2;
+    s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+    s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+    s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+    return s;
+  }
+  function smoothNormals(geo, cosC) {
+    const p = geo.attributes.position.array, n = p.length / 3;
+    const fn = new Float32Array(p.length);
+    const a = new T.Vector3(), b = new T.Vector3(), c = new T.Vector3(), e1 = new T.Vector3(), e2 = new T.Vector3();
+    for (let i = 0; i < n; i += 3) {
+      a.fromArray(p, i * 3); b.fromArray(p, i * 3 + 3); c.fromArray(p, i * 3 + 6);
+      e1.subVectors(b, a); e2.subVectors(c, a); e1.cross(e2).normalize();
+      for (let k = 0; k < 3; k++) { fn[(i + k) * 3] = e1.x; fn[(i + k) * 3 + 1] = e1.y; fn[(i + k) * 3 + 2] = e1.z; }
+    }
+    const buckets = new Map();
+    for (let i = 0; i < n; i++) {
+      const key = Math.round(p[i * 3] * 1e4) + ',' + Math.round(p[i * 3 + 1] * 1e4) + ',' + Math.round(p[i * 3 + 2] * 1e4);
+      let l = buckets.get(key);
+      if (!l) { l = []; buckets.set(key, l); }
+      l.push(i);
+    }
+    const out = new Float32Array(p.length);
+    buckets.forEach((l) => {
+      for (const i of l) {
+        let x = 0, y = 0, z = 0;
+        for (const j of l) {
+          const d = fn[i * 3] * fn[j * 3] + fn[i * 3 + 1] * fn[j * 3 + 1] + fn[i * 3 + 2] * fn[j * 3 + 2];
+          if (d > cosC) { x += fn[j * 3]; y += fn[j * 3 + 1]; z += fn[j * 3 + 2]; }
+        }
+        const L = Math.hypot(x, y, z) || 1;
+        out[i * 3] = x / L; out[i * 3 + 1] = y / L; out[i * 3 + 2] = z / L;
+      }
+    });
+    geo.setAttribute('normal', new T.BufferAttribute(out, 3));
+    return geo;
+  }
+  const rboxGeo = (w, h, d, r) => cached('r' + w + '|' + h + '|' + d + '|' + r, () => {
+    const bv = Math.min(r * 0.55, d * 0.18, w * 0.18, h * 0.18);
+    const depth = Math.max(0.001, d - 2 * bv);
+    let g = new T.ExtrudeGeometry(rrShape(w - 2 * bv, h - 2 * bv, Math.max(0.002, r - bv)), { depth, bevelEnabled: true, bevelThickness: bv, bevelSize: bv, bevelSegments: 3, curveSegments: 5 });
+    if (g.index) g = g.toNonIndexed();
+    g.translate(0, 0, -depth / 2);
+    return smoothNormals(g, 0.72);
+  });
+  const ecache = new Map();
+  const edgesOf = (g) => { let e = ecache.get(g.uuid); if (!e) { e = new T.EdgesGeometry(g, 40); ecache.set(g.uuid, e); } return e; };
+
+  function add(parent, geo, kind, x, y, z, o) {
+    const m = new T.Mesh(geo, M(kind));
+    m.position.set(x || 0, y || 0, z || 0);
+    m.castShadow = !(o && o.ns);
+    m.receiveShadow = true;
+    if (!(o && o.ne) && kind !== 'glass' && kind !== 'mesh') {
+      const l = new T.LineSegments(edgesOf(geo), CTX.line);
+      m.add(l);
+    }
+    if (o && o.keep) m.userData.keep = true;
+    parent.add(m);
+    return m;
+  }
+  const box = (p, k, w, h, d, x, y, z, o) => add(p, boxGeo(w, h, d), k, x, y, z, o);
+  const boxB = (p, k, w, h, d, x, y, z, o) => add(p, boxGeo(w, h, d), k, x, y + h / 2, z, o);
+  function cyl(p, k, r, h, x, y, z, ax, o) {
+    const m = add(p, cylGeo(r, h, (o && o.seg) || 24), k, x, y, z, o);
+    if (ax === 'x') m.rotation.z = Math.PI / 2;
+    else if (ax === 'z') m.rotation.x = Math.PI / 2;
+    return m;
+  }
+  const rbox = (p, k, w, h, d, r, x, y, z, o) => add(p, rboxGeo(w, h, d, r), k, x, y, z, Object.assign({ ne: true }, o));
+  const grp = (p, x, y, z) => { const g = new T.Group(); g.position.set(x || 0, y || 0, z || 0); p.add(g); return g; };
+  function meshPanel(p, w, h, x, y, z) {
+    const geo = cached('p' + w + '|' + h, () => {
+      const pg = new T.PlaneGeometry(w, h);
+      const uv = pg.attributes.uv;
+      for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * w / 0.4, uv.getY(i) * h / 0.4);
+      return pg;
+    });
+    return add(p, geo, 'mesh', x, y, z, { ns: true, ne: true, keep: true });
+  }
+  function floorRect(p, x0, z0, x1, z1, w) {
+    const o = { ne: true, ns: true };
+    box(p, 'floorMark', x1 - x0 + w, 0.004, w, (x0 + x1) / 2, 0.002, z0, o);
+    box(p, 'floorMark', x1 - x0 + w, 0.004, w, (x0 + x1) / 2, 0.002, z1, o);
+    box(p, 'floorMark', w, 0.004, z1 - z0 - w, x0, 0.002, (z0 + z1) / 2, o);
+    box(p, 'floorMark', w, 0.004, z1 - z0 - w, x1, 0.002, (z0 + z1) / 2, o);
+  }
+
+  /* ---------- equipment components (1 unit = 1 m, pass line 900mm) ---------- */
+  const PL = 0.9;
+  function lane(p, dir, u0, u1, v, half, legs) {
+    const L = u1 - u0, um = (u0 + u1) / 2, sp = half - 0.03;
+    const B = (k, lu, h, lw, u, y, w, o) => (dir === 'x' ? box(p, k, lu, h, lw, u, y, w, o) : box(p, k, lw, h, lu, w, y, u, o));
+    for (const s of [-1, 1]) {
+      B('alu', L, 0.08, 0.05, um, PL - 0.048, v + s * sp);
+      B('black', L, 0.008, 0.03, um, PL - 0.004, v + s * sp, { ne: true, ns: true });
+      B('alu', L, 0.035, 0.012, um, PL + 0.016, v + s * (half + 0.016), { ns: true });
+    }
+    if (legs === false) return;
+    const n = Math.max(2, Math.ceil(L / 1.25) + 1);
+    for (let i = 0; i < n; i++) {
+      const u = u0 + 0.12 + (L - 0.24) * (i / (n - 1));
+      for (const s of [-1, 1]) {
+        B('alu', 0.045, PL - 0.13, 0.045, u, (PL - 0.13) / 2 + 0.04, v + s * sp);
+        const fx = dir === 'x' ? u : v + s * sp, fz = dir === 'x' ? v + s * sp : u;
+        cyl(p, 'black', 0.032, 0.04, fx, 0.02, fz, 'y', { ne: true });
+      }
+      B('alu', 0.04, 0.04, 2 * sp + 0.045, u, 0.32, v);
+      B('alu', 0.04, 0.04, 2 * sp + 0.045, u, PL - 0.11, v);
+    }
+    B('alu', L - 0.2, 0.04, 0.04, um, 0.32, v);
+    B('black', L, 0.06, 0.07, um, PL - 0.2, v + half + 0.06);
+  }
+  function transferUnit(p, x, z) {
+    const g = grp(p, x, 0, z);
+    boxB(g, 'frame', 0.62, PL - 0.1, 0.62, 0, 0, 0);
+    boxB(g, 'dark', 0.66, 0.03, 0.66, 0, PL - 0.1, 0);
+    for (const s of [-1, 1]) {
+      boxB(g, 'alu', 0.62, 0.056, 0.04, 0, PL - 0.07, s * 0.15);
+      boxB(g, 'black', 0.62, 0.012, 0.03, 0, PL - 0.012, s * 0.15, { ne: true, ns: true });
+      boxB(g, 'black', 0.03, 0.012, 0.62, s * 0.22, PL - 0.012, 0, { ne: true, ns: true });
+    }
+    box(g, 'dark', 0.3, 0.18, 0.006, 0, 0.45, 0.312, { ne: true, ns: true });
+    return g;
+  }
+  function pallet(p) {
+    const g = grp(p);
+    g.userData.dyn = true;
+    boxB(g, 'dark', 0.5, 0.03, 0.35, 0, 0, 0);
+    cyl(g, 'steel', 0.016, 0.012, 0.2, 0.036, 0.12, 'y', { ne: true });
+    cyl(g, 'steel', 0.016, 0.012, -0.2, 0.036, -0.12, 'y', { ne: true });
+    boxB(g, 'alu', 0.035, 0.03, 0.22, -0.175, 0.03, 0);
+    boxB(g, 'alu', 0.035, 0.03, 0.22, 0.175, 0.03, 0);
+    g.userData.base = rbox(g, 'work', 0.3, 0.11, 0.22, 0.02, 0, 0.085, 0);
+    g.userData.cover = boxB(g, 'cover', 0.31, 0.018, 0.23, 0, 0.14, 0);
+    return g;
+  }
+  function stackLight(p, x, y, z) {
+    const g = grp(p, x, y, z);
+    cyl(g, 'alu', 0.012, 0.18, 0, 0.09, 0, 'y', { ne: true });
+    cyl(g, 'lampG', 0.036, 0.065, 0, 0.2125, 0, 'y', { ne: true });
+    cyl(g, 'lampY', 0.036, 0.065, 0, 0.2775, 0, 'y', { ne: true });
+    cyl(g, 'lampR', 0.036, 0.065, 0, 0.3425, 0, 'y', { ne: true });
+    cyl(g, 'black', 0.036, 0.022, 0, 0.386, 0, 'y', { ne: true });
+    return g;
+  }
+  function gantry(p, x, z) {
+    const g = grp(p, x, 0, z);
+    const Hh = 1.95, sp = 0.44;
+    for (const s of [-1, 1]) {
+      boxB(g, 'frame', 0.2, 0.02, 0.2, 0, 0, s * sp);
+      boxB(g, 'alu', 0.09, Hh - 0.02, 0.09, 0, 0.02, s * sp);
+    }
+    boxB(g, 'alu', 0.11, 0.13, 2 * sp + 0.12, 0, Hh, 0);
+    boxB(g, 'black', 0.06, 0.05, 0.5, 0, Hh + 0.13, -0.12, { ns: true });
+    boxB(g, 'dark', 0.12, 0.46, 0.14, -0.1, Hh - 0.46, 0);
+    const slide = grp(g);
+    slide.userData.dyn = true;
+    boxB(slide, 'alu', 0.04, 0.42, 0.1, -0.045, 1.24, 0);
+    cyl(slide, 'black', 0.042, 0.3, 0, 1.45, 0, 'y');
+    cyl(slide, 'steel', 0.032, 0.08, 0, 1.26, 0, 'y');
+    cyl(slide, 'steel', 0.013, 0.16, 0, 1.14, 0, 'y', { ne: true });
+    g.userData.slide = slide;
+    return g;
+  }
+  const SH = { x: 0.1, y: 0.37 }, L1 = 0.62, L2 = 0.62;
+  function robotArm(p) {
+    const R = grp(p);
+    R.userData.dyn = true;
+    cyl(R, 'robot', 0.165, 0.09, 0, 0.045, 0, 'y');
+    cyl(R, 'dark', 0.14, 0.06, 0, 0.12, 0, 'y');
+    const j1 = grp(R, 0, 0.15, 0);
+    rbox(j1, 'robot', 0.32, 0.2, 0.3, 0.06, 0.02, 0.1, 0);
+    cyl(j1, 'robot', 0.115, 0.3, 0.1, 0.22, 0, 'z');
+    cyl(j1, 'dark', 0.075, 0.1, 0.1, 0.22, -0.19, 'z');
+    const j2 = grp(j1, 0.1, 0.22, 0);
+    rbox(j2, 'robot', 0.14, 0.7, 0.16, 0.06, 0, 0.3, 0.02);
+    const j3 = grp(j2, 0, 0.62, 0);
+    cyl(j3, 'robot', 0.092, 0.24, 0, 0, 0.02, 'z');
+    cyl(j3, 'dark', 0.062, 0.07, 0, 0, 0.16, 'z');
+    rbox(j3, 'robot', 0.66, 0.12, 0.13, 0.05, 0.27, 0.015, 0);
+    const j5 = grp(j3, 0.62, 0, 0);
+    cyl(j5, 'dark', 0.056, 0.13, 0, 0, 0, 'z');
+    const tool = grp(j5);
+    cyl(tool, 'robot', 0.038, 0.06, 0, -0.06, 0, 'y');
+    boxB(tool, 'dark', 0.13, 0.05, 0.07, 0, -0.14, 0);
+    boxB(tool, 'steel', 0.016, 0.05, 0.05, -0.055, -0.19, 0, { ne: true });
+    boxB(tool, 'steel', 0.016, 0.05, 0.05, 0.055, -0.19, 0, { ne: true });
+    const held = boxB(tool, 'cover', 0.31, 0.018, 0.23, 0, -0.208, 0);
+    Object.assign(R.userData, { j1, j2, j3, j5, tool, held, base: new T.Vector3() });
+    return R;
+  }
+  function solve(R, wx, wy, wz) {
+    const u = R.userData, b = u.base;
+    const dxw = wx - b.x, dzw = wz - b.z;
+    const phi = Math.atan2(-dzw, dxw);
+    const dx = Math.hypot(dxw, dzw) - SH.x, dy = wy - b.y - SH.y;
+    const d = Math.min(Math.hypot(dx, dy), L1 + L2 - 0.001);
+    const th = Math.atan2(dy, dx);
+    const Bn = Math.acos(clamp((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d), -1, 1));
+    const a1 = th + Bn;
+    const a2 = Math.atan2(dy - L1 * Math.sin(a1), dx - L1 * Math.cos(a1));
+    u.j1.rotation.y = phi;
+    u.j2.rotation.z = a1 - Math.PI / 2;
+    u.j3.rotation.z = a2 - a1 + Math.PI / 2;
+    u.j5.rotation.z = -a2;
+    u.tool.rotation.y = -phi;
+  }
+  function robotCell(p) {
+    const g = grp(p);
+    boxB(g, 'frame', 0.5, 0.48, 0.5, 1.5, 0, -1.7);
+    boxB(g, 'dark', 0.56, 0.02, 0.56, 1.5, 0.48, -1.7);
+    const t = grp(g, 2.4, 0, -1.7);
+    boxB(t, 'frame', 0.62, 0.035, 0.52, 0, 0.715, 0);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(t, 'alu', 0.04, 0.715, 0.04, sx * 0.27, 0, sz * 0.22);
+    boxB(t, 'tote', 0.52, 0.06, 0.44, 0, 0.75, 0);
+    for (let i = 0; i < 3; i++) boxB(t, 'cover', 0.31, 0.018, 0.23, 0, 0.81 + i * 0.018, 0);
+    return g;
+  }
+  function fence(p) {
+    const g = grp(p);
+    const z0 = -2.5, z1 = -1.2, x0 = 0.72, x1 = 3.2, xm = (x0 + x1) / 2;
+    for (const [x, z] of [[x0, z1], [x0, z0], [xm, z0], [x1, z0], [x1, z1]]) {
+      boxB(g, 'yellow', 0.06, 1.9, 0.06, x, 0, z);
+      boxB(g, 'dark', 0.14, 0.012, 0.14, x, 0, z);
+    }
+    const panel = (xa, za, xb, zb) => {
+      const L = Math.hypot(xb - xa, zb - za) - 0.08;
+      const pg = grp(g, (xa + xb) / 2, 0, (za + zb) / 2);
+      pg.rotation.y = Math.atan2(-(zb - za), xb - xa);
+      boxB(pg, 'dark', L, 0.03, 0.03, 0, 0.12, 0);
+      boxB(pg, 'dark', L, 0.03, 0.03, 0, 1.8, 0);
+      boxB(pg, 'dark', 0.03, 1.68, 0.03, -L / 2, 0.12, 0);
+      boxB(pg, 'dark', 0.03, 1.68, 0.03, L / 2, 0.12, 0);
+      meshPanel(pg, L - 0.03, 1.65, 0, 0.975, 0);
+    };
+    panel(x0, z1, x0, z0); panel(x0, z0, xm, z0); panel(xm, z0, x1, z0); panel(x1, z0, x1, z1);
+    return g;
+  }
+  function dispenseCell(p, x, z) {
+    const g = grp(p, x, 0, z);
+    const W = 0.9, D = 0.84, Ht = 1.9;
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(g, 'alu', 0.045, Ht, 0.045, sx * W / 2, 0, sz * D / 2);
+    for (const sz of [-1, 1]) { boxB(g, 'alu', W, 0.045, 0.045, 0, Ht - 0.045, sz * D / 2); boxB(g, 'alu', W, 0.04, 0.04, 0, 1.2, sz * D / 2); }
+    for (const sx of [-1, 1]) { boxB(g, 'alu', 0.045, 0.045, D, sx * W / 2, Ht - 0.045, 0); boxB(g, 'alu', 0.04, 0.04, D, sx * W / 2, 1.2, 0); }
+    for (const sz of [-1, 1]) box(g, 'glass', W - 0.05, 0.6, 0.006, 0, 1.54, sz * D / 2, { ns: true, keep: true });
+    for (const sx of [-1, 1]) box(g, 'glass', 0.006, 0.6, D - 0.05, sx * W / 2, 1.54, 0, { ns: true, keep: true });
+    box(g, 'glass', W - 0.05, 0.006, D - 0.05, 0, Ht - 0.02, 0, { ns: true, keep: true });
+    for (const sz of [-1, 1]) boxB(g, 'frame', W - 0.06, 0.66, 0.014, 0, 0.12, sz * D / 2);
+    boxB(g, 'alu', W - 0.06, 0.07, 0.09, 0, 1.66, -0.26);
+    const head = grp(g);
+    head.userData.dyn = true;
+    boxB(head, 'dark', 0.11, 0.12, 0.12, 0, 1.58, -0.26);
+    const yArm = grp(head);
+    boxB(yArm, 'alu', 0.05, 0.05, 0.3, 0, 1.6, -0.12);
+    const zh = grp(yArm);
+    boxB(zh, 'dark', 0.06, 0.08, 0.06, 0, 1.55, 0);
+    cyl(zh, 'cover', 0.022, 0.16, 0, 1.47, 0, 'y');
+    cyl(zh, 'steel', 0.006, 0.06, 0, 1.36, 0, 'y', { ne: true });
+    Object.assign(g.userData, { head, yArm, zh });
+    return g;
+  }
+  function pressStation(p, x, z) {
+    const g = grp(p, x, 0, z);
+    const sp = 0.44;
+    for (const s of [-1, 1]) {
+      boxB(g, 'frame', 0.22, 0.02, 0.22, 0, 0, s * sp);
+      boxB(g, 'frame', 0.12, 1.8, 0.12, 0, 0.02, s * sp);
+    }
+    boxB(g, 'frame', 0.2, 0.16, 2 * sp + 0.12, 0, 1.82, 0);
+    cyl(g, 'alu', 0.06, 0.42, 0, 2.19, 0, 'y');
+    cyl(g, 'dark', 0.066, 0.03, 0, 1.995, 0, 'y');
+    cyl(g, 'dark', 0.066, 0.03, 0, 2.385, 0, 'y');
+    cyl(g, 'okLamp', 0.028, 0.05, 0.12, 2.005, 0.34, 'y', { ne: true });
+    const hood = grp(g);
+    hood.userData.dyn = true;
+    rbox(hood, 'dark', 0.4, 0.2, 0.32, 0.03, 0, 1.42, 0);
+    boxB(hood, 'alu', 0.44, 0.03, 0.36, 0, 1.52, 0);
+    cyl(hood, 'steel', 0.018, 0.7, 0, 1.9, 0, 'y', { ne: true });
+    const t = grp(g, 0.42, 0, 0.66);
+    boxB(t, 'alu', 0.05, 1.0, 0.05, 0, 0, 0);
+    boxB(t, 'frame', 0.32, 0.26, 0.2, 0, 1.0, 0);
+    box(t, 'screen', 0.2, 0.12, 0.01, 0, 1.15, 0.105, { ne: true, ns: true });
+    g.userData.hood = hood;
+    return g;
+  }
+  function flowRack(p, x, z) {
+    const g = grp(p, x, 0, z);
+    const W = 0.95, D = 0.6, Hh = 1.55;
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(g, 'alu', 0.04, Hh, 0.04, sx * W / 2, 0, sz * D / 2);
+    for (const y of [0.45, 0.85, 1.25]) {
+      const sh = grp(g, 0, y, 0);
+      sh.rotation.x = 0.12;
+      boxB(sh, 'alu', W, 0.03, D, 0, 0, 0);
+      for (let i = -1; i <= 1; i++) boxB(sh, 'tote', 0.27, 0.13, 0.36, i * 0.3, 0.03, 0.08);
+    }
+    boxB(g, 'alu', W + 0.04, 0.04, 0.04, 0, Hh - 0.04, -D / 2);
+    return g;
+  }
+  function cart(p, x, z) {
+    const g = grp(p, x, 0, z);
+    for (const y of [0.25, 0.7]) boxB(g, 'frame', 0.9, 0.03, 0.55, 0, y, 0);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      boxB(g, 'alu', 0.035, 0.66, 0.035, sx * 0.43, 0.09, sz * 0.255);
+      cyl(g, 'black', 0.045, 0.035, sx * 0.4, 0.045, sz * 0.23, 'z', { ne: true });
+    }
+    boxB(g, 'alu', 0.035, 0.035, 0.55, -0.45, 1.0, 0);
+    for (const sz of [-1, 1]) boxB(g, 'alu', 0.035, 0.28, 0.035, -0.45, 0.73, sz * 0.255);
+    for (let i = -1; i <= 1; i++) {
+      rbox(g, 'work', 0.24, 0.1, 0.18, 0.02, i * 0.28, 0.78, 0);
+      boxB(g, 'cover', 0.25, 0.015, 0.19, i * 0.28, 0.83, 0);
+    }
+    return g;
+  }
+  function cabinet(p, x, z) {
+    const g = grp(p, x, 0, z);
+    boxB(g, 'dark', 0.84, 0.1, 0.54, 0, 0, 0);
+    rbox(g, 'frame', 0.8, 1.9, 0.5, 0.02, 0, 1.05, 0);
+    box(g, 'dark', 0.006, 1.78, 0.004, 0, 1.05, 0.251, { ne: true, ns: true });
+    box(g, 'dark', 0.31, 0.23, 0.008, -0.19, 1.42, 0.252, { ne: true, ns: true });
+    box(g, 'screen', 0.27, 0.19, 0.006, -0.19, 1.42, 0.257, { ne: true, ns: true });
+    cyl(g, 'yellow', 0.045, 0.012, 0.19, 1.42, 0.256, 'z', { ne: true });
+    cyl(g, 'red', 0.03, 0.03, 0.19, 1.42, 0.27, 'z', { ne: true });
+    for (const s of [-1, 1]) box(g, 'steel', 0.02, 0.14, 0.02, s * 0.05, 1.05, 0.262, { ne: true });
+    stackLight(g, 0.24, 2.0, 0);
+    return g;
+  }
+  function stationModule(p, x, isNew) {
+    const g = grp(p, x, 0, 0);
+    for (const s of [-1, 1]) boxB(g, 'frame', 0.86, 0.78, 0.2, 0, 0, s * 0.36);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(g, isNew ? 'blue' : 'alu', 0.045, 1.08, 0.045, sx * 0.41, 0.8, sz * 0.43);
+    boxB(g, isNew ? 'blue' : 'frame', 0.9, 0.06, 0.92, 0, 1.88, 0);
+    for (const s of [-1, 1]) box(g, isNew ? 'blue' : 'frame', 0.86, 0.045, 0.045, 0, 1.2, s * 0.43);
+    for (const s of [-1, 1]) box(g, 'glass', 0.8, 0.62, 0.006, 0, 1.55, s * 0.43, { ns: true });
+    boxB(g, 'dark', 0.14, 0.3, 0.14, 0, 1.4, 0);
+    cyl(g, 'steel', 0.02, 0.2, 0, 1.3, 0, 'y', { ne: true });
+    return g;
+  }
+
+  /* ---------- static merge (fewer draw calls) ---------- */
+  function concat(list, normals) {
+    let n = 0;
+    for (const g of list) n += g.attributes.position.count;
+    const pos = new Float32Array(n * 3), nor = normals ? new Float32Array(n * 3) : null;
+    let o = 0;
+    for (const g of list) {
+      pos.set(g.attributes.position.array, o * 3);
+      if (nor) nor.set(g.attributes.normal.array, o * 3);
+      o += g.attributes.position.count;
+      g.dispose();
+    }
+    const out = new T.BufferGeometry();
+    out.setAttribute('position', new T.BufferAttribute(pos, 3));
+    if (nor) out.setAttribute('normal', new T.BufferAttribute(nor, 3));
+    return out;
+  }
+  function mergeStatic(root) {
+    root.updateMatrixWorld(true);
+    const inv = new T.Matrix4().copy(root.matrixWorld).invert();
+    const buckets = new Map(), lines = [], victims = [], m4 = new T.Matrix4();
+    (function walk(o) {
+      for (const ch of o.children) {
+        if (ch.userData.dyn) continue;
+        if (ch.isMesh && !ch.userData.keep) {
+          const g = ch.geometry.index ? ch.geometry.toNonIndexed() : ch.geometry.clone();
+          g.applyMatrix4(m4.multiplyMatrices(inv, ch.matrixWorld));
+          let b = buckets.get(ch.material);
+          if (!b) { b = []; buckets.set(ch.material, b); }
+          b.push(g);
+          for (const l of ch.children) {
+            if (l.isLineSegments) {
+              const lg = l.geometry.clone();
+              lg.applyMatrix4(m4.multiplyMatrices(inv, l.matrixWorld));
+              lines.push(lg);
+            }
+          }
+          victims.push(ch);
+          walk(ch);
+        } else if (!ch.isLineSegments) {
+          walk(ch);
+        }
+      }
+    })(root);
+    for (const v of victims) if (v.parent) v.parent.remove(v);
+    buckets.forEach((list, mat) => {
+      const mesh = new T.Mesh(concat(list, true), mat);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      root.add(mesh);
+    });
+    if (lines.length) root.add(new T.LineSegments(concat(lines, false), CTX.line));
+  }
+
+  /* ---------- environment and floor ---------- */
+  function makeEnv(r) {
+    const pm = new T.PMREMGenerator(r);
+    const room = new T.Scene();
+    const unit = new T.BoxGeometry(1, 1, 1);
+    const shell = new T.Mesh(unit, new T.MeshBasicMaterial({ color: lin('#3A4550'), side: T.BackSide }));
+    shell.scale.set(24, 12, 24);
+    shell.position.y = 5;
+    room.add(shell);
+    const panel = (x, y, z, sx, sy, sz, i) => {
+      const m = new T.Mesh(unit, new T.MeshBasicMaterial({ color: new T.Color(i, i, i) }));
+      m.position.set(x, y, z);
+      m.scale.set(sx, sy, sz);
+      room.add(m);
+    };
+    panel(0, 10.6, 0, 10, 0.2, 4, 7);
+    panel(-11.6, 5, 3, 0.2, 4, 6, 3.5);
+    panel(11.6, 6, -4, 0.2, 5, 5, 2.5);
+    panel(0, 4, 11.6, 8, 3, 0.2, 1.8);
+    const tex = pm.fromScene(room, 0.035).texture;
+    pm.dispose();
+    return tex;
+  }
+  function makeFloor(r) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 1024;
+    const g = c.getContext('2d');
+    g.fillStyle = '#0E2650';
+    g.fillRect(0, 0, 1024, 1024);
+    g.strokeStyle = 'rgba(150,190,235,0.12)';
+    g.lineWidth = 1;
+    for (let k = 0; k <= 24; k++) {
+      const q = Math.round(k * 1024 / 24) + 0.5;
+      g.beginPath(); g.moveTo(q, 0); g.lineTo(q, 1024); g.moveTo(0, q); g.lineTo(1024, q); g.stroke();
+    }
+    g.globalCompositeOperation = 'destination-in';
+    const rg = g.createRadialGradient(512, 512, 90, 512, 512, 512);
+    rg.addColorStop(0, 'rgba(0,0,0,1)');
+    rg.addColorStop(0.5, 'rgba(0,0,0,0.85)');
+    rg.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = rg;
+    g.fillRect(0, 0, 1024, 1024);
+    const tex = new T.CanvasTexture(c);
+    tex.encoding = T.sRGBEncoding;
+    tex.anisotropy = r.capabilities.getMaxAnisotropy();
+    const fl = new T.Mesh(new T.PlaneGeometry(24, 24), new T.MeshStandardMaterial({ map: tex, transparent: true, roughness: 0.92, metalness: 0, depthWrite: false }));
+    fl.rotation.x = -Math.PI / 2;
+    fl.position.set(-0.3, 0, -0.1);
+    fl.receiveShadow = true;
+    fl.renderOrder = -1;
+    return fl;
+  }
+
+  /* ---------- hero scene ---------- */
+  let renderer;
+  try {
+    renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  } catch (e) { noGL(); return; }
+  const small = Math.min(window.innerWidth, window.innerHeight) < 700;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2));
+  renderer.setClearColor(0x000000, 0);
+  renderer.outputEncoding = T.sRGBEncoding;
+  renderer.toneMapping = T.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = T.PCFSoftShadowMap;
+
+  const scene = new T.Scene();
+  const camera = new T.PerspectiveCamera(28, 1, 0.5, 90);
+  const target = new T.Vector3(-0.3, 0.45, -0.1);
+  const groups = [];
+  const N = 10, P = 1.5, WL = 6, HL = 1.5, LP = 2 * (WL + HL);
+  let gantry20, robot, disp, press, cabMats, pressMats;
+  const pallets = [];
+
+  try {
+    scene.environment = makeEnv(renderer);
+    scene.add(new T.HemisphereLight(lin('#DCE8F4'), lin('#22304A'), 0.55));
+    const key = new T.DirectionalLight(lin('#FFF1DE'), 2.1);
+    key.position.set(5.5, 10, 7);
+    key.target.position.set(-0.3, 0, -0.2);
+    key.castShadow = true;
+    const sm = small ? 1024 : 2048;
+    key.shadow.mapSize.set(sm, sm);
+    Object.assign(key.shadow.camera, { left: -7, right: 7, top: 6.5, bottom: -6.5, near: 2, far: 28 });
+    key.shadow.camera.updateProjectionMatrix();
+    key.shadow.bias = -0.0005;
+    key.shadow.normalBias = 0.025;
+    scene.add(key, key.target);
+    const fill = new T.DirectionalLight(lin('#A4C2E6'), 0.55);
+    fill.position.set(-8, 5, -3);
+    scene.add(fill);
+    const rim = new T.DirectionalLight(lin('#FFFFFF'), 0.45);
+    rim.position.set(-2, 7, -9);
+    scene.add(rim);
+    scene.add(makeFloor(renderer));
+
+    const world = new T.Group();
+    scene.add(world);
+    const G = (ex, build) => {
+      CTX = ctxNew('hero');
+      const root = new T.Group();
+      world.add(root);
+      build(root);
+      mergeStatic(root);
+      const meshes = [];
+      root.traverse((o) => { if (o.isMesh) { o.userData.cs = o.castShadow; o.castShadow = false; meshes.push(o); } });
+      const rec = { root, ex, mats: Object.values(CTX.mats), line: CTX.line, meshes, shadowOn: false, ctx: CTX };
+      groups.push(rec);
+      return rec;
+    };
+    G([0, 0, 0], (r) => {
+      floorRect(r, -4.75, -2.75, 4.05, 2.4, 0.06);
+      floorRect(r, -1.85, -1.42, -1.15, -1.02, 0.03);
+      floorRect(r, -1.85, 1.02, -1.15, 1.42, 0.03);
+    });
+    G([0, 0.35, 0], (r) => {
+      lane(r, 'x', -2.67, 2.67, -0.75, 0.175);
+      lane(r, 'x', -2.67, 2.67, 0.75, 0.175);
+      lane(r, 'z', -0.42, 0.42, 3, 0.25, false);
+      lane(r, 'z', -0.42, 0.42, -3, 0.25, false);
+    });
+    G([0, 0.7, 0], (r) => { for (const [x, z] of [[-3, -0.75], [3, -0.75], [3, 0.75], [-3, 0.75]]) transferUnit(r, x, z); });
+    G([0, 1.6, -0.35], (r) => { gantry20 = gantry(r, 0, -0.75); });
+    G([0.15, 0.9, -0.5], (r) => { robotCell(r); });
+    G([0.2, 1.9, -0.55], (r) => {
+      robot = robotArm(r);
+      robot.position.set(1.5, 0.5, -1.7);
+      robot.userData.base.set(1.5, 0.5, -1.7);
+    });
+    G([0, 0, -1.3], (r) => { fence(r); });
+    G([0.3, 1.5, 0.6], (r) => { disp = dispenseCell(r, 1.5, 0.75); });
+    pressMats = G([0, 1.9, 0.5], (r) => { press = pressStation(r, 0, 0.75); }).ctx.mats;
+    G([0, 0.8, 0], (r) => { flowRack(r, -1.5, -1.85); cart(r, -1.5, 1.85); });
+    cabMats = G([-0.6, 0.8, -0.3], (r) => { cabinet(r, -4.05, -1.75); }).ctx.mats;
+    G([0, 1.2, 0], (r) => { for (let i = 0; i < N; i++) pallets.push(pallet(r)); });
+  } catch (e) {
+    noGL();
+    try { renderer.dispose(); } catch (err) { /* ignore */ }
+    return;
+  }
+
+  /* ---------- line logic: indexing pallet loop ---------- */
+  const slot = (s) => {
+    s = mod(s, LP);
+    if (s < WL) return [-3 + s, -0.75];
+    if (s < WL + HL) return [3, -0.75 + (s - WL)];
+    if (s < 2 * WL + HL) return [3 - (s - WL - HL), 0.75];
+    return [-3, 0.75 - (s - 2 * WL - HL)];
+  };
+  const MOVE = 1000, DWELL = 2000, CYC = MOVE + DWELL;
+  const LOAD = 1, UNLOAD = 8, ROBOT_SLOT = 3;
+  const hasBase = new Array(N).fill(false), hasCover = new Array(N).fill(false);
+  const RB = { x: 1.5, z: -1.7 };
+  const PU = { a: -Math.PI / 2, r: 0.95, y: 1.56 }, PD = { a: -Math.PI / 2, r: 0.95, y: 1.248 };
+  const TU = { a: 0, r: 0.9, y: 1.37 }, TD = { a: 0, r: 0.9, y: 1.054 };
+  const RSEQ = [[0, 550, PU, PD], [550, 750, PD, PD], [750, 1100, PD, PU], [1100, 1700, PU, TU], [1700, 2000, TU, TD], [2000, 2150, TD, TD], [2150, 2450, TD, TU], [2450, 3000, TU, PU]];
+  const countEl = document.getElementById('count');
+  let runT = 0, lastC = -1, flags = {}, count = 0, holding = true;
+
+  function place(c, f) {
+    for (let i = 0; i < N; i++) {
+      const s = slot((i + c + f) * P);
+      pallets[i].position.set(s[0], PL, s[1]);
+    }
+  }
+  function syncPallets() {
+    for (let i = 0; i < N; i++) {
+      pallets[i].userData.base.visible = hasBase[i];
+      pallets[i].userData.cover.visible = hasBase[i] && hasCover[i];
+    }
+  }
+  function robotPose(tc) {
+    let A = PU, B = PU, k = 0;
+    for (const s of RSEQ) {
+      if (tc >= s[0] && tc < s[1]) { A = s[2]; B = s[3]; k = ease((tc - s[0]) / (s[1] - s[0])); break; }
+    }
+    const a = lerp(A.a, B.a, k), r = lerp(A.r, B.r, k), y = lerp(A.y, B.y, k);
+    solve(robot, RB.x + r * Math.cos(a), y, RB.z - r * Math.sin(a));
+  }
+  function rectPath(q, a, b) {
+    let s = q * 4 * (a + b);
+    if (s < 2 * a) return [-a + s, -b];
+    s -= 2 * a;
+    if (s < 2 * b) return [a, -b + s];
+    s -= 2 * b;
+    if (s < 2 * a) return [a - s, b];
+    s -= 2 * a;
+    return [-a, b - s];
+  }
+  function stations(u) {
+    const k20 = u < 0 ? 0 : ease(span(u, 0.08, 0.28)) * (1 - ease(span(u, 0.7, 0.9)));
+    gantry20.userData.slide.position.y = lerp(0.18, -0.015, k20);
+    const d = disp.userData;
+    if (u < 0) {
+      d.head.position.x = 0; d.yArm.position.z = 0; d.zh.position.y = 0;
+    } else {
+      d.zh.position.y = -0.255 * ease(span(u, 0.06, 0.16)) * (1 - ease(span(u, 0.84, 0.94)));
+      const pt = rectPath(span(u, 0.16, 0.84), 0.14, 0.1);
+      const blend = Math.min(span(u, 0.1, 0.17), 1 - span(u, 0.83, 0.9));
+      d.head.position.x = pt[0] * blend;
+      d.yArm.position.z = pt[1] * blend;
+    }
+    const k50 = u < 0 ? 0 : ease(span(u, 0, 0.22)) * (1 - ease(span(u, 0.76, 0.98)));
+    press.userData.hood.position.y = -0.36 * k50;
+    if (pressMats.okLamp) pressMats.okLamp.emissiveIntensity = (u >= 0.5 && u < 0.9) ? 2.4 : 0;
+  }
+  function resetRun() {
+    runT = 0; lastC = -1; flags = {}; count = 0; holding = true;
+    for (let i = 0; i < N; i++) { hasBase[i] = i >= 1 && i <= 8; hasCover[i] = i >= 4 && i <= 8; }
+    robot.userData.held.visible = true;
+    syncPallets();
+    place(0, 0);
+    robotPose(0);
+    stations(-1);
+    countEl.textContent = '0000';
+  }
+  function runStep(dt) {
+    runT += dt;
+    const c = Math.floor(runT / CYC), tc = runT - c * CYC;
+    if (c !== lastC) { lastC = c; flags = {}; }
+    if (tc < DWELL) {
+      place(c, 0);
+      if (!flags.place && tc >= 650) {
+        flags.place = true;
+        if (holding) {
+          const i = mod(ROBOT_SLOT - c, N);
+          if (hasBase[i]) hasCover[i] = true;
+          holding = false;
+          robot.userData.held.visible = false;
+        }
+      }
+      if (!flags.unload && tc >= 800) {
+        flags.unload = true;
+        const i = mod(UNLOAD - c, N);
+        if (hasBase[i]) {
+          hasBase[i] = false; hasCover[i] = false;
+          count = (count + 1) % 10000;
+          countEl.textContent = String(count).padStart(4, '0');
+        }
+      }
+      if (!flags.load && tc >= 900) {
+        flags.load = true;
+        const i = mod(LOAD - c, N);
+        hasBase[i] = true; hasCover[i] = false;
+      }
+      syncPallets();
+      stations(tc / DWELL);
+    } else {
+      place(c, ease((tc - DWELL) / MOVE));
+      stations(-1);
+      if (!flags.grip && tc >= 2075) {
+        flags.grip = true;
+        holding = true;
+        robot.userData.held.visible = true;
+      }
+    }
+    robotPose(tc);
+  }
+
+  /* ---------- intro: design -> build -> install -> run ---------- */
+  const LINE_STEP = 130, LINE_DUR = 520;
+  const BUILD_AT = 1900, BUILD_STEP = 80, BUILD_DUR = 650;
+  const INST_AT = 3300, INST_STEP = 150, INST_DUR = 1000;
+  const RUN_AT = INST_AT + INST_STEP * (groups.length - 1) + INST_DUR + 150;
+  function applyIntro(t) {
+    for (let i = 0; i < groups.length; i++) {
+      const g = groups[i];
+      const lf = ease(span(t, i * LINE_STEP, i * LINE_STEP + LINE_DUR));
+      const mf = ease(span(t, BUILD_AT + i * BUILD_STEP, BUILD_AT + i * BUILD_STEP + BUILD_DUR));
+      const k = ease(span(t, INST_AT + i * INST_STEP, INST_AT + i * INST_STEP + INST_DUR));
+      g.line.opacity = lf * lerp(0.9, 0.24, mf);
+      g.line.color.copy(LINE_DESIGN).lerp(LINE_SHADED, mf);
+      for (const m of g.mats) {
+        m.opacity = m.userData.base * mf;
+        m.transparent = m.userData.alwaysT || mf < 0.999;
+        m.depthWrite = !m.userData.alwaysT && mf > 0.5;
+      }
+      const sh = mf > 0.6;
+      if (sh !== g.shadowOn) {
+        g.shadowOn = sh;
+        for (const o of g.meshes) o.castShadow = sh && o.userData.cs;
+      }
+      g.root.position.set(g.ex[0] * (1 - k), g.ex[1] * (1 - k), g.ex[2] * (1 - k));
+    }
+  }
+  function lamps(t) {
+    const run = t >= RUN_AT;
+    if (cabMats.lampG) cabMats.lampG.emissiveIntensity = run ? 2.6 : 0;
+    if (cabMats.lampY) cabMats.lampY.emissiveIntensity = (!run && t >= INST_AT && Math.floor(t / 380) % 2 === 0) ? 2.2 : 0;
+  }
+
+  /* ---------- HUD ---------- */
+  const phaseEls = Array.from(document.querySelectorAll('#phases li'));
+  const stateEl = document.getElementById('state');
+  const lampEl = document.getElementById('lamp');
+  const replayBtn = document.getElementById('replay');
+  const vcube = document.getElementById('vcube');
+  const triadLines = Array.from(document.querySelectorAll('#triad line'));
+  const triadText = Array.from(document.querySelectorAll('#triad text'));
+  const STATE = ['설계 중', '제작 중', '설치 중', '가동 중'];
+  const BOUNDS = [0, BUILD_AT, INST_AT, RUN_AT];
+  let curPhase = -1;
+  function hud(t) {
+    const ph = t < BUILD_AT ? 0 : t < INST_AT ? 1 : t < RUN_AT ? 2 : 3;
+    for (let i = 0; i < 4; i++) {
+      const p = i < ph ? 1 : i > ph ? 0 : (i === 3 ? 1 : span(t, BOUNDS[i], BOUNDS[i + 1]));
+      phaseEls[i].style.setProperty('--p', (p * 100).toFixed(1) + '%');
+    }
+    if (ph !== curPhase) {
+      curPhase = ph;
+      phaseEls.forEach((el, i) => { el.classList.toggle('on', i === ph); el.classList.toggle('done', i < ph); });
+      stateEl.textContent = STATE[ph];
+      lampEl.classList.toggle('run', ph === 3);
+      replayBtn.hidden = !(ph === 3 && motionOK);
+    }
+  }
+  const AX = [new T.Vector3(1, 0, 0), new T.Vector3(0, 1, 0), new T.Vector3(0, 0, 1)];
+  const tv3 = new T.Vector3(), qInv = new T.Quaternion();
+  function triad() {
+    qInv.copy(camera.quaternion).invert();
+    for (let i = 0; i < 3; i++) {
+      tv3.copy(AX[i]).applyQuaternion(qInv);
+      const x = tv3.x * 19, y = -tv3.y * 19;
+      triadLines[i].setAttribute('x2', x.toFixed(1));
+      triadLines[i].setAttribute('y2', y.toFixed(1));
+      triadText[i].setAttribute('x', (x * 1.34).toFixed(1));
+      triadText[i].setAttribute('y', (y * 1.34 + 3).toFixed(1));
+    }
+  }
+
+  /* ---------- camera ---------- */
+  const mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  let motionOK = !mq.matches;
+  const BASE_AZ = -0.42, BASE_EL = 0.56;
+  let fitDist = 18, uAz = 0, uEl = 0, tAz = 0, tEl = 0, drag = null;
+  function updateCamera(now, k) {
+    uAz += (tAz - uAz) * 0.12;
+    uEl += (tEl - uEl) * 0.12;
+    const sway = motionOK ? Math.sin(now * 0.00022) * 0.17 : 0;
+    const az = BASE_AZ + sway + uAz;
+    const el = clamp(BASE_EL + uEl + 0.1 * (1 - k), 0.15, 1.2);
+    const d = fitDist * (1 + 0.16 * (1 - k));
+    camera.position.set(target.x + d * Math.sin(az) * Math.cos(el), target.y + d * Math.sin(el), target.z + d * Math.cos(az) * Math.cos(el));
+    camera.lookAt(target);
+    vcube.style.transform = 'rotateX(' + (-el).toFixed(3) + 'rad) rotateY(' + (-az).toFixed(3) + 'rad)';
+    triad();
+  }
+  function fit() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    const tv = Math.tan(T.MathUtils.degToRad(camera.fov) / 2), th = tv * camera.aspect;
+    fitDist = Math.max(10.4 / 2 / th, 6.8 / 2 / tv);
+  }
+
+  /* ---------- loop ---------- */
+  let clock = 300, last = 0, raf = 0, looping = false, inView = true;
+  const introK = (t) => ease(span(t, 1600, RUN_AT));
+  function draw() { renderer.render(scene, camera); }
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    const dt = last ? Math.min(now - last, 50) : 16;
+    last = now;
+    clock += dt;
+    applyIntro(Math.min(clock, RUN_AT + 400));
+    if (clock >= RUN_AT) runStep(dt);
+    lamps(clock);
+    hud(clock);
+    updateCamera(now, introK(clock));
+    draw();
+  }
+  function start() {
+    if (looping || !motionOK || !inView || document.hidden) return;
+    looping = true;
+    last = 0;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() {
+    looping = false;
+    cancelAnimationFrame(raf);
+  }
+  function still() {
+    clock = RUN_AT + 400;
+    applyIntro(clock);
+    lamps(clock);
+    hud(clock);
+    updateCamera(0, 1);
+    draw();
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    drag = { id: e.pointerId, x: e.clientX, y: e.clientY };
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+    vp.classList.add('dragging', 'dragged');
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!drag || e.pointerId !== drag.id) return;
+    tAz -= (e.clientX - drag.x) * 0.006;
+    if (e.pointerType !== 'touch') tEl = clamp(tEl + (e.clientY - drag.y) * 0.004, -0.38, 0.5);
+    drag.x = e.clientX;
+    drag.y = e.clientY;
+    if (!looping) { uAz = tAz; uEl = tEl; updateCamera(0, 1); draw(); }
+  });
+  const endDrag = () => { drag = null; vp.classList.remove('dragging'); };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('lostpointercapture', endDrag);
+  replayBtn.addEventListener('click', () => {
+    clock = 300;
+    resetRun();
+    applyIntro(clock);
+    hud(clock);
+    start();
+  });
+
+  fit();
+  resetRun();
+  if (motionOK) {
+    applyIntro(clock);
+    lamps(clock);
+    hud(clock);
+    updateCamera(performance.now(), 0);
+    draw();
+    start();
+  } else {
+    still();
+  }
+
+  if ('ResizeObserver' in window) new ResizeObserver(() => { fit(); if (!looping) { updateCamera(0, motionOK ? introK(clock) : 1); draw(); } }).observe(stage);
+  else window.addEventListener('resize', () => { fit(); if (!looping) draw(); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      inView = entries[0].isIntersecting;
+      if (inView) start(); else stop();
+    }, { threshold: 0.05 }).observe(stage);
+  }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else start(); });
+  const onMotionPref = () => {
+    motionOK = !mq.matches;
+    if (!motionOK) { stop(); still(); } else start();
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onMotionPref);
+
+  /* ---------- 3D renders for the business cards ---------- */
+  function vAssembly(r) {
+    lane(r, 'x', -1.45, 1.45, 0, 0.175);
+    const a = pallet(r); a.position.set(-0.7, PL, 0);
+    const b = pallet(r); b.position.set(0.7, PL, 0); b.userData.cover.visible = false;
+    dispenseCell(r, -0.7, 0);
+    const g = gantry(r, 0.7, 0); g.userData.slide.position.y = 0.05;
+    stackLight(r, 0.7, 2.08, 0.44);
+    M('lampG').emissiveIntensity = 2.4;
+  }
+  function vHandling(r) {
+    const bays = 3, lv = 4, bw = 0.62, lh = 0.42, dep = 0.5, x0 = -bays * bw / 2, top = 0.12 + lv * lh;
+    for (let i = 0; i <= bays; i++) for (const s of [-1, 1]) boxB(r, 'frame', 0.05, top + 0.08, 0.05, x0 + i * bw, 0, s * dep / 2);
+    for (let l = 0; l < lv; l++) for (const s of [-1, 1]) boxB(r, 'blue', bays * bw, 0.05, 0.03, 0, 0.12 + l * lh, s * dep / 2);
+    for (let l = 0; l < lv; l++) for (let i = 0; i < bays; i++) {
+      if ((l === 2 && i === 1) || (l === 0 && i === 2) || (l === 3 && i === 0)) continue;
+      boxB(r, 'tote', 0.5, 0.26, 0.42, x0 + (i + 0.5) * bw, 0.17 + l * lh, 0);
+    }
+    const cz = dep / 2 + 0.36;
+    boxB(r, 'steel', bays * bw + 0.9, 0.04, 0.09, 0, 0, cz);
+    boxB(r, 'steel', bays * bw + 0.9, 0.04, 0.06, 0, top + 0.1, cz);
+    for (let i = 0; i <= bays; i++) boxB(r, 'frame', 0.04, 0.04, cz - dep / 2, x0 + i * bw, top + 0.06, (dep / 2 + cz) / 2);
+    boxB(r, 'frame', 0.62, 0.2, 0.32, 0, 0.04, cz);
+    boxB(r, 'dark', 0.2, 0.14, 0.2, -0.22, 0.24, cz);
+    boxB(r, 'alu', 0.12, top - 0.1, 0.16, 0.2, 0.24, cz);
+    boxB(r, 'frame', 0.3, 0.06, 0.2, 0.2, top + 0.04, cz);
+    const ly = 0.12 + 2 * lh + 0.05;
+    boxB(r, 'yellow', 0.52, 0.06, 0.3, 0, ly - 0.04, cz);
+    boxB(r, 'yellow', 0.08, 0.34, 0.3, 0.2, ly - 0.04, cz);
+    boxB(r, 'alu', 0.46, 0.025, 0.44, 0, ly + 0.02, cz - 0.08);
+    boxB(r, 'tote', 0.5, 0.26, 0.42, 0, ly + 0.045, cz - 0.08);
+  }
+  function vSpecial(r) {
+    boxB(r, 'dark', 3.1, 0.05, 0.9, 0, 0, 0);
+    for (const s of [-1, 1]) {
+      const g = grp(r, s * 1.22, 0.05, 0);
+      boxB(g, 'frame', 0.56, 0.8, 0.72, 0, 0, 0);
+      rbox(g, 'frame', 0.5, 0.4, 0.6, 0.06, -s * 0.02, 1.0, 0);
+      cyl(g, 'steel', 0.12, 0.1, -s * 0.3, 1.0, 0, 'x');
+      cyl(g, 'steel', 0.5, 0.06, -s * 0.38, 1.0, 0, 'x');
+      for (let k = 0; k < 4; k++) { const rib = box(g, 'dark', 0.02, 0.84, 0.06, -s * 0.418, 1.0, 0); rib.rotation.x = k * Math.PI / 4; }
+      if (s < 0) {
+        boxB(g, 'dark', 0.34, 0.3, 0.2, 0, 0.5, 0.46);
+        cyl(g, 'alu', 0.09, 0.26, 0, 0.65, 0.69, 'z');
+      }
+    }
+    const fx = grp(r, 0, 1.05, 0);
+    fx.rotation.x = 0.4;
+    for (const s of [-1, 1]) box(fx, 'blue', 1.66, 0.1, 0.1, 0, 0, s * 0.3);
+    for (const x of [-0.6, 0, 0.6]) box(fx, 'blue', 0.08, 0.08, 0.7, x, 0, 0);
+    for (const x of [-0.6, 0.6]) box(fx, 'dark', 0.1, 0.12, 0.5, x, 0.1, 0);
+    cyl(fx, 'steel', 0.24, 1.5, 0, 0.34, 0, 'x', { seg: 40 });
+  }
+  function vRobot(r) {
+    boxB(r, 'frame', 0.5, 0.48, 0.5, 0, 0, 0);
+    boxB(r, 'dark', 0.56, 0.02, 0.56, 0, 0.48, 0);
+    const R = robotArm(r);
+    R.position.set(0, 0.5, 0);
+    R.userData.base.set(0, 0.5, 0);
+    R.userData.held.visible = false;
+    const t = grp(r, 0, 0, 0.92);
+    boxB(t, 'frame', 0.9, 0.04, 0.6, 0, 0.7, 0);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(t, 'alu', 0.04, 0.7, 0.04, sx * 0.4, 0, sz * 0.25);
+    boxB(t, 'tote', 0.7, 0.04, 0.44, 0, 0.74, 0);
+    for (let i = -1; i <= 1; i++) for (let j = 0; j < 2; j++) rbox(t, 'work', 0.15, 0.08, 0.12, 0.015, i * 0.21, 0.82, -0.09 + j * 0.18);
+    const cs = grp(r, 0.64, 0, 0.92);
+    boxB(cs, 'alu', 0.05, 1.8, 0.05, 0, 0, 0);
+    boxB(cs, 'alu', 0.66, 0.04, 0.04, -0.33, 1.72, 0);
+    boxB(cs, 'black', 0.1, 0.12, 0.1, -0.64, 1.6, 0);
+    cyl(cs, 'dark', 0.032, 0.07, -0.64, 1.565, 0, 'y');
+    const ring = add(cs, torusGeo(0.07, 0.012), 'ring', -0.64, 1.53, 0, { ne: true, ns: true });
+    ring.rotation.x = Math.PI / 2;
+    solve(R, 0.21, 1.11, 0.83);
+    M('ring').emissiveIntensity = 1.6;
+  }
+  function vRetrofit(r) {
+    CTX.force = 'ghost';
+    lane(r, 'x', -1.75, 1.75, 0, 0.175);
+    stationModule(r, -1.1, false);
+    stationModule(r, 0, false);
+    for (const x of [-1.1, 0]) { const pp = pallet(r); pp.position.set(x, PL, 0); }
+    CTX.force = null;
+    stationModule(r, 1.1, true);
+    const pn = pallet(r); pn.position.set(1.1, PL, 0);
+    floorRect(r, 0.55, -0.62, 1.65, 0.62, 0.035);
+  }
+  function vExport(r) {
+    for (const z of [-0.45, 0, 0.45]) boxB(r, 'wood', 1.96, 0.12, 0.1, 0, 0, z);
+    for (let i = 0; i < 9; i++) boxB(r, 'wood', 0.17, 0.025, 1.06, -0.87 + i * 0.2175, 0.12, 0);
+    const y0 = 0.145;
+    const m = grp(r, 0, y0, 0);
+    boxB(m, 'frame', 1.5, 0.66, 0.78, 0, 0, 0);
+    boxB(m, 'dark', 1.54, 0.03, 0.82, 0, 0.66, 0);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(m, 'alu', 0.045, 0.95, 0.045, sx * 0.73, 0.69, sz * 0.38);
+    boxB(m, 'frame', 1.52, 0.05, 0.82, 0, 1.64, 0);
+    for (const s of [-1, 1]) box(m, 'glass', 1.42, 0.9, 0.006, 0, 1.165, s * 0.38, { ns: true });
+    boxB(m, 'alu', 1.3, 0.05, 0.3, 0, 0.69, 0);
+    for (const s of [-1, 1]) boxB(m, 'alu', 0.06, 0.82, 0.06, 0.2, 0.69, s * 0.3);
+    boxB(m, 'alu', 0.1, 0.08, 0.7, 0.2, 1.47, 0);
+    boxB(m, 'dark', 0.1, 0.25, 0.1, 0.2, 1.22, 0);
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) boxB(r, 'wood', 0.08, 1.75, 0.08, sx * 0.93, y0, sz * 0.49);
+    for (const sz of [-1, 1]) boxB(r, 'wood', 1.94, 0.08, 0.08, 0, y0 + 1.75, sz * 0.49);
+    for (const sx of [-1, 1]) boxB(r, 'wood', 0.08, 0.08, 1.06, sx * 0.93, y0 + 1.75, 0);
+    const br = box(r, 'wood', 2.38, 0.07, 0.03, 0, y0 + 0.9, -0.51);
+    br.rotation.z = Math.atan2(1.6, 1.8);
+  }
+  const VIG = { assembly: vAssembly, handling: vHandling, special: vSpecial, robot: vRobot, retrofit: vRetrofit, export: vExport };
+  function shot(r2, env, cam, fn) {
+    const sc = new T.Scene();
+    sc.environment = env;
+    CTX = ctxNew('vig');
+    const root = new T.Group();
+    sc.add(root);
+    fn(root);
+    const bb = new T.Box3().setFromObject(root);
+    const c = bb.getCenter(new T.Vector3());
+    const rad = bb.getSize(new T.Vector3()).length() / 2;
+    sc.add(new T.HemisphereLight(lin('#EAF2FA'), lin('#5A6168'), 0.7));
+    const k = new T.DirectionalLight(lin('#FFF4E6'), 2.0);
+    k.position.set(c.x + rad * 0.9, c.y + rad * 2.0, c.z + rad * 1.3);
+    k.target.position.copy(c);
+    k.castShadow = true;
+    k.shadow.mapSize.set(2048, 2048);
+    const s2 = rad * 1.4;
+    Object.assign(k.shadow.camera, { left: -s2, right: s2, top: s2, bottom: -s2, near: 0.1, far: rad * 6 });
+    k.shadow.camera.updateProjectionMatrix();
+    k.shadow.bias = -0.0004;
+    k.shadow.normalBias = 0.02;
+    sc.add(k, k.target);
+    const f = new T.DirectionalLight(lin('#B9D0EA'), 0.5);
+    f.position.set(c.x - rad * 2, c.y + rad, c.z - rad);
+    sc.add(f);
+    const catcher = new T.Mesh(new T.PlaneGeometry(rad * 6, rad * 6), new T.ShadowMaterial({ opacity: 0.16 }));
+    catcher.rotation.x = -Math.PI / 2;
+    catcher.position.set(c.x, 0.0005, c.z);
+    catcher.receiveShadow = true;
+    sc.add(catcher);
+    const az = -0.62, el = 0.5;
+    const dir = new T.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el));
+    let dist = rad / Math.tan(T.MathUtils.degToRad(cam.fov) / 2);
+    const corners = [];
+    for (let i = 0; i < 8; i++) corners.push(new T.Vector3(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, i & 4 ? bb.max.z : bb.min.z));
+    const v = new T.Vector3();
+    for (let it = 0; it < 3; it++) {
+      cam.position.copy(c).addScaledVector(dir, dist);
+      cam.lookAt(c);
+      cam.updateMatrixWorld();
+      let mx = 0;
+      for (const p of corners) { v.copy(p).project(cam); mx = Math.max(mx, Math.abs(v.x), Math.abs(v.y)); }
+      dist *= mx / 0.9;
+    }
+    cam.position.copy(c).addScaledVector(dir, dist);
+    cam.lookAt(c);
+    r2.render(sc, cam);
+    let url = r2.domElement.toDataURL('image/webp', 0.92);
+    if (url.indexOf('data:image/webp') !== 0) url = r2.domElement.toDataURL('image/png');
+    Object.keys(CTX.mats).forEach((key) => CTX.mats[key].dispose());
+    CTX.line.dispose();
+    catcher.geometry.dispose();
+    catcher.material.dispose();
+    return url;
+  }
+  function renderCards() {
+    const items = Array.from(document.querySelectorAll('[data-render]'));
+    if (!items.length) return;
+    let r2;
+    try { r2 = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); } catch (e) { return; }
+    r2.setPixelRatio(1);
+    r2.setSize(960, 600, false);
+    r2.setClearColor(0x000000, 0);
+    r2.outputEncoding = T.sRGBEncoding;
+    r2.toneMapping = T.ACESFilmicToneMapping;
+    r2.toneMappingExposure = 1.0;
+    r2.shadowMap.enabled = true;
+    r2.shadowMap.type = T.PCFSoftShadowMap;
+    let env = null;
+    try { env = makeEnv(r2); } catch (e) { env = null; }
+    const cam = new T.PerspectiveCamera(24, 960 / 600, 0.05, 100);
+    let i = 0;
+    const next = () => {
+      if (i >= items.length) {
+        try { r2.dispose(); r2.forceContextLoss(); } catch (e) { /* ignore */ }
+        return;
+      }
+      const el = items[i++];
+      const fn = VIG[el.dataset.render];
+      if (fn) {
+        try {
+          const url = shot(r2, env, cam, fn);
+          const img = el.querySelector('img');
+          img.onload = () => { img.hidden = false; el.classList.add('ready'); };
+          img.src = url;
+        } catch (e) { /* keep the line icon */ }
+      }
+      setTimeout(next, 40);
+    };
+    next();
+  }
+  const idle = window.requestIdleCallback ? (f) => window.requestIdleCallback(f, { timeout: 1500 }) : (f) => setTimeout(f, 200);
+  setTimeout(() => idle(renderCards), 700);
+})();
+</script>
+
+</body>
+</html>
