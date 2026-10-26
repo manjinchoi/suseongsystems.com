@@ -23,3 +23,9 @@
 - `@` A 레코드 4개: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 - `www` CNAME: `manjinchoi.github.io.`
 - 회사 메일(하이웍스)용 MX·TXT 레코드는 건드리지 않습니다.
+- GitHub Pages 설정에서 **Enforce HTTPS**를 켜 두었습니다. `http://`와 `www.` 주소는 모두 `https://suseongsystems.com/`으로 넘어갑니다.
+
+## 검색엔진 등록
+
+- `index.html`의 `<head>` 안에 네이버 서치어드바이저 소유확인 태그(`<meta name="naver-site-verification" …>`)가 들어 있습니다. 지우면 소유확인이 풀리므로, `index.html`을 새로 만들 때도 이 줄은 그대로 둡니다.
+- 사이트맵: https://suseongsystems.com/sitemap.xml — 내용을 크게 바꾸면 `lastmod` 날짜도 고칩니다.
